@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using Script3r_Library;
+using Script3rLibrary;
 
 namespace New_GUI
 {
