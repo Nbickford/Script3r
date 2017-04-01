@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CognitiveServices.SpeechRecognition;
 using System.IO;
+using System.Threading;
 
 namespace BingSpeech_nbickford {
     class Program {
@@ -13,7 +14,12 @@ namespace BingSpeech_nbickford {
             // Test code for running Microsoft's Cognitive Speech Services on an input audio file.
 
             SpeechRecognizer recognizer = new SpeechRecognizer();
-            string recognizedSpeech = recognizer.RecognizeSpeech(@"D:\N.B\Footage\Recordings\LA Hacks Ovation\s1bt2.wav");
+            List<string> recognizedSpeech = recognizer.RecognizeSpeech(@"D:\N.B\Footage\Recordings\LA Hacks Ovation\s1bt2.wav");
+
+            Console.WriteLine("Here are the phrases we recieved:");
+            for (int i = 0; i < recognizedSpeech.Count; i++) {
+                Console.WriteLine(recognizedSpeech[i]);
+            }
 
             Console.WriteLine("Press ENTER to exit...");
             Console.ReadLine();
@@ -24,6 +30,11 @@ namespace BingSpeech_nbickford {
     class SpeechRecognizer{
         private string subscriptionKey = "fd25c649aae54f4aa902edb3a80a34d1";
         private string authenticationUri = ""; // according to the sample app, this is optional
+
+        // Manual reset event for making the speech call synchronous
+        ManualResetEvent oSignalEvent;
+
+        List<string> parsedPhrases;
 
         /// <summary>
         /// The data recognition client
@@ -38,15 +49,17 @@ namespace BingSpeech_nbickford {
             dataClient.AuthenticationUri = authenticationUri;
 
             dataClient.OnResponseReceived += OnDataDictationResponseReceivedHandler;
+
+            parsedPhrases = new List<string>();
+            oSignalEvent = new ManualResetEvent(false);
             
             //TODO (neil): Partial responses and conversation errors
             //this.dataClient.OnPartialResponseReceived += this.OnPartialResponseReceivedHandler;
             //this.dataClient.OnConversationError += this.OnConversationErrorHandler;
         }
 
-        public string RecognizeSpeech(string inputFile) {
+        public List<string> RecognizeSpeech(string inputFile) {
             //TODO (neil): Input file verification
-            //TODO (neil): Make this a blocking call
 
             //Read the file into memory in blocks and send to the services API.
             // This is copy-and pasted from the sample code.
@@ -75,7 +88,11 @@ namespace BingSpeech_nbickford {
                 this.dataClient.EndAudio();
             }
 
-            return "";
+            //Wait for the final response event to occur in the OnResponseRecieved event call.
+            oSignalEvent.WaitOne();
+            oSignalEvent.Reset();
+
+            return parsedPhrases;
         }
         
         /// <summary>
@@ -84,11 +101,14 @@ namespace BingSpeech_nbickford {
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="SpeechResponseEventArgs"/> instance containing the event data.</param>
         private void OnDataDictationResponseReceivedHandler(object sender, SpeechResponseEventArgs e) {
+            WriteResponseResult(e);
+
             // Also copy-and pasted from the sample code.
             Console.WriteLine("--- OnDataDictationResponseReceivedHandler ---");
             if (e.PhraseResponse.RecognitionStatus == RecognitionStatus.EndOfDictation || //TODO (neil) Should this be changed?
                 e.PhraseResponse.RecognitionStatus == RecognitionStatus.DictationEndSilenceTimeout) {
                 Console.WriteLine("We have final result!");
+                oSignalEvent.Set();
 
                 /*Dispatcher.Invoke(
                     (Action)(() => {
@@ -100,8 +120,6 @@ namespace BingSpeech_nbickford {
                         // sending all the data.
                     }));*/
             }
-
-            WriteResponseResult(e);
         }
 
         /// <summary>
@@ -120,6 +138,7 @@ namespace BingSpeech_nbickford {
                         e.PhraseResponse.Results[i].Confidence,
                         e.PhraseResponse.Results[i].LexicalForm);
                 }
+                parsedPhrases.Add(e.PhraseResponse.Results[0].LexicalForm);
 
                 Console.WriteLine();
             }
