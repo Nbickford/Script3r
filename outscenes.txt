@@ -1,0 +1,1369 @@
+1 alpha take 8
+scene 2 bravo take 5
+scene 3 charlie take 36
+4 delta take 20
+5 echo take 14
+scene 6 foxtrot take 13
+7 golf take 36
+scene 8 hotel take 8
+9 india take 10
+scene 10 juliet take 8
+11 kilo take 38
+scene 12 lima take 28
+scene 13 mike take 27
+scene 14 november take 7
+15 oscar take 34
+16 papa take 1
+17 quebec take 24
+scene 18 romeo take 31
+scene 19 sierra take 29
+scene 20 tango take 3
+scene 21 uniform take 25
+22 victor take 11
+23 whiskey take 31
+24 xray take 9
+25 yankee take 10
+scene 26 zulu take 19
+27 acorn take 2
+scene 28 alfalfa take 11
+29 almond take 27
+scene 30 anchovy take 5
+scene 31 anise take 14
+32 appetizer take 24
+scene 33 appetite take 30
+34 apple take 28
+35 apricot take 22
+scene 36 artichoke take 34
+scene 37 asparagus take 39
+38 aspic take 24
+scene 39 ate take 1
+scene 40 avocado take 24
+41 bacon take 16
+42 bagel take 21
+43 bake take 4
+44 baked take 7
+45 bamboo take 15
+46 banana take 30
+scene 47 barbecue take 8
+48 barley take 23
+49 basil take 16
+50 batter take 30
+51 beancurd take 32
+scene 52 beans take 7
+scene 53 beef take 24
+54 beet take 27
+55 bell take 14
+scene 56 berry take 4
+scene 57 biscuit take 25
+58 bitter take 33
+59 black take 9
+60 blackberry take 20
+scene 61 black-eyed take 17
+62 black take 3
+63 bland take 2
+scene 64 blood take 29
+scene 65 blueberry take 6
+scene 66 boil take 13
+scene 67 bowl take 26
+scene 68 boysenberry take 24
+69 bran take 18
+70 bread take 30
+scene 71 breadfruit take 6
+scene 72 breakfast take 17
+scene 73 brisket take 18
+74 broccoli take 24
+scene 75 broil take 37
+scene 76 brownie take 20
+77 brown take 3
+78 brunch take 24
+79 Brussels take 30
+scene 80 buckwheat take 17
+scene 81 buns take 23
+scene 82 burrito take 8
+scene 83 butter take 36
+scene 84 cake take 29
+85 calorie take 8
+scene 86 candy take 37
+scene 87 cantaloupe take 39
+88 capers take 8
+scene 89 caramel take 5
+90 carbohydrate take 9
+91 carrot take 5
+scene 92 cashew take 20
+93 cassava take 39
+94 casserole take 35
+95 cater take 13
+96 cauliflower take 5
+scene 97 caviar take 32
+98 cayenne take 8
+99 celery take 23
+scene 100 cereal take 9
+scene 101 chard take 29
+scene 102 cheddar take 20
+103 cheese take 29
+scene 104 cheesecake take 39
+scene 105 chef take 29
+scene 106 cherry take 36
+107 chew take 3
+scene 108 chicken take 22
+109 chick peas take 4
+scene 110 chili take 20
+111 chips take 11
+scene 112 chives take 5
+scene 113 chocolate take 14
+scene 114 chopsticks take 20
+115 chow take 3
+116 chutney take 28
+117 cilantro take 25
+118 cinnamon take 15
+scene 119 citron take 32
+120 citrus take 4
+scene 121 clam take 30
+scene 122 cloves take 32
+123 cobbler take 17
+scene 124 coconut take 13
+125 cod take 2
+126 coffee take 33
+127 coleslaw take 15
+scene 128 collard take 12
+scene 129 comestibles take 25
+130 cook take 10
+scene 131 cookbook take 37
+scene 132 cookie take 21
+133 corn take 8
+134 cornflakes take 28
+135 cornmeal take 36
+136 cottage take 8
+137 crab take 29
+scene 138 crackers take 3
+139 cranberry take 24
+scene 140 cream take 6
+scene 141 cream take 21
+scene 142 crepe take 16
+scene 143 crisp take 30
+144 crunch take 10
+scene 145 crust take 16
+scene 146 cucumber take 29
+scene 147 cuisine take 31
+148 cupboard take 9
+149 cupcake take 32
+scene 150 curds take 16
+scene 151 currants take 2
+152 curry take 6
+153 custard take 34
+154 daikon take 30
+155 dairy take 15
+scene 156 dandelion take 3
+scene 157 Danish pastry take 19
+scene 158 dates take 37
+scene 159 dessert take 23
+160 diet take 10
+scene 161 digest take 26
+scene 162 digestive take 22
+163 dill take 11
+scene 164 dine take 15
+165 diner take 2
+166 dinner take 15
+scene 167 dip take 32
+scene 168 dish take 16
+scene 169 dough take 4
+170 doughnut take 39
+scene 171 dragonfruit take 40
+172 dressing take 18
+173 dried take 22
+174 drink take 10
+scene 175 dry take 23
+scene 176 durian take 20
+scene 177 eat take 6
+scene 178 Edam take 23
+scene 179 edible take 33
+180 egg take 20
+scene 181 eggplant take 36
+182 elderberry take 39
+scene 183 endive take 23
+scene 184 entree take 7
+185 fast take 24
+186 fat take 32
+187 fava take 24
+scene 188 feast take 30
+189 fed take 30
+scene 190 feed take 31
+191 fennel take 20
+192 fig take 2
+scene 193 fillet take 12
+scene 194 fire take 7
+scene 195 fish take 20
+196 flan take 2
+scene 197 flax take 36
+scene 198 flour take 10
+scene 199 food take 40
+200 food take 28
+201 foodstuffs take 3
+scene 202 fork take 13
+scene 203 freezer take 34
+scene 204 French take 3
+205 fried take 4
+206 fritter take 24
+207 frosting take 8
+scene 208 fruit take 14
+209 fry take 25
+210 garlic take 21
+scene 211 gastronomy take 9
+scene 212 gelatin take 28
+213 ginger take 34
+scene 214 gingerale take 31
+scene 215 gingerbread take 1
+scene 216 glasses take 18
+scene 217 Gouda take 22
+scene 218 grain take 29
+scene 219 granola take 37
+scene 220 grape take 22
+221 grapefruit take 39
+scene 222 grated take 29
+scene 223 gravy take 19
+224 greenbean take 4
+scene 225 greens take 37
+scene 226 green take 33
+scene 227 grub take 33
+scene 228 guacamole take 28
+scene 229 guava take 36
+230 gyro take 18
+231 herbs take 18
+232 halibut take 40
+233 ham take 11
+scene 234 hamburger take 37
+235 hash take 14
+236 hazelnut take 36
+237 herbs take 14
+238 honey take 7
+scene 239 honeydew take 9
+scene 240 horseradish take 31
+241 hot take 15
+scene 242 hummus take 16
+243 hunger take 37
+scene 244 hungry take 9
+scene 245 ice take 27
+246 iceberg take 28
+247 iced take 38
+248 icing take 25
+scene 249 jackfruit take 40
+250 jalapeno take 29
+scene 251 jam take 3
+scene 252 jelly take 28
+253 jellybeans take 19
+254 jicama take 30
+255 jimmies take 30
+256 Jordan take 25
+257 jug take 1
+scene 258 julienne take 6
+scene 259 juice take 26
+scene 260 junk take 25
+261 kale take 24
+scene 262 kebab take 38
+scene 263 ketchup take 8
+264 kettle take 25
+scene 265 kettle take 15
+266 kidney take 28
+267 kitchen take 23
+268 kiwi take 23
+269 knife take 40
+scene 270 kohlrabi take 12
+271 kumquat take 15
+scene 272 ladle take 22
+scene 273 lamb take 9
+274 lard take 34
+scene 275 lasagna take 7
+276 legumes take 17
+277 lemon take 36
+278 lemonade take 9
+279 lentils take 14
+scene 280 lettuce take 6
+281 licorice take 28
+scene 282 lima take 4
+scene 283 lime take 14
+284 liver take 27
+scene 285 loaf take 33
+286 lobster take 13
+287 lollipop take 38
+288 loquat take 29
+scene 289 lox take 21
+scene 290 lunch take 31
+291 lunch take 21
+292 lunchmeat take 20
+293 lychee take 1
+scene 294 macaroni take 26
+295 macaroon take 29
+scene 296 main take 16
+scene 297 maize take 16
+scene 298 mandarin take 25
+299 mango take 24
+300 maple syrup take 9
+scene 301 margarine take 27
+scene 302 marionberry take 14
+scene 303 marmalade take 24
+304 marshmallow take 4
+305 mashed take 30
+306 mayonnaise take 19
+scene 307 meat take 14
+308 meatball take 10
+scene 309 meatloaf take 14
+scene 310 melon take 14
+scene 311 menu take 27
+scene 312 meringue take 37
+313 micronutrient take 20
+314 milk take 14
+315 milkshake take 6
+316 millet take 28
+317 mincemeat take 10
+318 minerals take 32
+scene 319 mint take 2
+scene 320 mints take 3
+321 mochi take 16
+scene 322 molasses take 38
+scene 323 mole sauce take 25
+324 mozzarella take 38
+scene 325 muffin take 38
+326 mug take 5
+327 munch take 19
+328 mushroom take 33
+scene 329 mussels take 9
+330 mustard take 5
+scene 331 mutton take 27
+scene 332 napkin take 26
+scene 333 nectar take 21
+scene 334 nectarine take 24
+scene 335 nibble take 18
+336 noodles take 21
+scene 337 nosh take 40
+scene 338 nourish take 9
+scene 339 nourishment take 29
+340 nut take 26
+341 nutmeg take 18
+scene 342 nutrient take 29
+343 nutrition take 20
+344 nutritious take 37
+345 oats take 35
+scene 346 oatmeal take 4
+scene 347 oil take 17
+348 okra take 17
+scene 349 oleo take 18
+scene 350 olive take 23
+351 omelet take 3
+scene 352 omnivore take 33
+353 onion take 24
+scene 354 orange take 1
+scene 355 order take 15
+scene 356 oregano take 34
+357 oven take 25
+358 oyster take 24
+scene 359 pan take 34
+360 pancake take 17
+scene 361 papaya take 40
+362 parsley take 28
+scene 363 parsnip take 9
+364 pasta take 21
+365 pastry take 6
+scene 366 pate take 1
+367 patty take 13
+368 pattypan take 28
+scene 369 peach take 13
+scene 370 peanut take 14
+371 peanut take 3
+372 pea take 33
+scene 373 pear take 38
+scene 374 pecan take 5
+scene 375 peapod take 3
+376 pepper take 17
+scene 377 pepperoni take 14
+378 persimmon take 17
+scene 379 pickle take 13
+scene 380 picnic take 29
+381 pie take 17
+scene 382 pilaf take 22
+383 pineapple take 32
+384 pita take 39
+385 pitcher take 34
+386 pizza take 31
+387 plate take 8
+scene 388 platter take 35
+scene 389 plum take 20
+scene 390 poached take 27
+scene 391 pomegranate take 32
+scene 392 pomelo take 11
+393 pop take 32
+scene 394 popsicle take 22
+395 popcorn take 5
+396 popovers take 27
+scene 397 pork take 16
+scene 398 pot take 7
+399 potato take 32
+400 pot roast take 2
+401 preserves take 20
+scene 402 pretzel take 6
+scene 403 prime rib take 10
+404 protein take 5
+405 provisions take 20
+scene 406 prune take 27
+407 pudding take 30
+408 pumpernickel take 5
+409 pumpkin take 29
+410 punch take 8
+411 quiche take 22
+scene 412 quinoa take 8
+scene 413 queen take 3
+414 radish take 26
+scene 415 raisin take 24
+scene 416 raspberry take 13
+scene 417 rations take 9
+418 ravioli take 34
+scene 419 recipe take 8
+420 refreshments take 6
+scene 421 refrigerator take 37
+422 relish take 25
+scene 423 restaurant take 22
+scene 424 rhubarb take 27
+scene 425 ribs take 28
+426 rice take 25
+427 roast take 28
+428 roll take 20
+429 rolling take 28
+scene 430 romaine take 27
+431 rosemary take 38
+432 rye take 1
+433 saffron take 11
+434 sage take 8
+scene 435 salad take 20
+scene 436 salami take 30
+scene 437 salmon take 30
+438 salsa take 19
+scene 439 salt take 29
+440 sandwich take 14
+441 sauce take 30
+scene 442 sauerkraut take 40
+scene 443 sausage take 23
+scene 444 savory take 28
+445 scallops take 24
+scene 446 scrambled take 7
+447 seaweed take 32
+448 seeds take 3
+scene 449 sesame take 23
+450 shallots take 9
+451 sherbet take 17
+452 shish take 5
+453 shrimp take 39
+scene 454 slaw take 6
+scene 455 slice take 12
+456 smoked take 25
+457 snack take 13
+scene 458 soda take 11
+scene 459 soda take 37
+scene 460 sole take 11
+461 sorbet take 28
+462 sorghum take 26
+463 sorrel take 27
+464 soup take 21
+scene 465 sour take 11
+scene 466 soy take 8
+467 soybeans take 23
+468 soysauce take 24
+469 spaghetti take 33
+scene 470 spareribs take 9
+scene 471 spatula take 27
+scene 472 spices take 30
+473 spicy take 31
+474 spinach take 33
+scene 475 split take 17
+scene 476 spoon take 33
+scene 477 spork take 24
+scene 478 sprinkles take 6
+scene 479 sprouts take 14
+480 spuds take 19
+scene 481 squash take 29
+scene 482 squid take 22
+483 steak take 32
+scene 484 stew take 19
+485 stir-fry take 34
+scene 486 stomach take 39
+scene 487 stove take 34
+scene 488 straw take 12
+489 strawberry take 27
+490 string take 20
+scene 491 stringy take 21
+492 strudel take 13
+493 sub take 13
+scene 494 submarine take 7
+scene 495 succotash take 29
+scene 496 suet take 11
+scene 497 sugar take 8
+498 summer take 29
+scene 499 sundae take 31
+scene 500 sunflower take 1
+501 supper take 24
+scene 502 sushi take 16
+503 sustenance take 7
+504 sweet take 36
+505 Swiss take 7
+506 syrup take 38
+scene 507 taco take 3
+scene 508 take-out take 17
+509 tamale take 13
+scene 510 tangerine take 30
+511 tapioca take 40
+scene 512 taro take 30
+scene 513 tarragon take 1
+514 tart take 22
+scene 515 tea take 33
+516 teapot take 6
+517 teriyaki take 31
+scene 518 thyme take 21
+519 toast take 27
+520 toaster take 30
+521 toffee take 6
+522 tofu take 4
+scene 523 tomatillo take 10
+524 tomato take 11
+scene 525 torte take 22
+scene 526 tortilla take 21
+scene 527 tuber take 30
+528 tuna take 29
+scene 529 turkey take 2
+scene 530 turmeric take 36
+scene 531 turnip take 21
+scene 532 ugli fruit take 22
+scene 533 unleavened take 6
+534 utensils take 11
+scene 535 vanilla take 13
+536 veal take 20
+537 vegetable take 25
+scene 538 venison take 38
+539 vinegar take 2
+540 vitamin take 25
+541 wafer take 12
+scene 542 waffle take 15
+543 walnut take 14
+scene 544 wasabi take 40
+scene 545 water take 11
+scene 546 watercress take 2
+scene 547 watermelon take 5
+scene 548 wheat take 21
+scene 549 whey take 36
+550 whipped take 36
+551 wok take 36
+scene 552 yam take 27
+553 yeast take 13
+554 yogurt take 5
+555 yolk take 24
+556 zucchini take 30
+557 zebra take 9
+scene 558 Charizard take 28
+scene 559 Pikachu take 32
+scene 560 Rayquaza take 11
+scene 561 Lucario take 21
+562 Snorlax take 6
+scene 563 Arceus take 11
+scene 564 Mewtwo take 36
+565 Suicune take 12
+566 Darkrai take 13
+567 Bulbasaur take 37
+scene 568 Mew take 14
+scene 569 Articuno take 13
+scene 570 Metagross take 3
+571 Blastoise take 20
+scene 572 Kyogre take 37
+573 Kyurem take 14
+574 Raichu take 2
+575 Haunter take 18
+scene 576 Magnemite take 27
+scene 577 Sylveon take 38
+scene 578 Dragonite take 28
+579 Lugia take 17
+580 Gengar take 40
+581 Eevee take 40
+582 Charmander take 36
+583 Jigglypuff take 21
+584 Squirtle take 21
+585 Flareon take 34
+586 alpha take 5
+587 bravo take 26
+588 charlie take 1
+scene 589 delta take 21
+scene 590 echo take 1
+591 foxtrot take 33
+scene 592 golf take 22
+scene 593 hotel take 26
+594 india take 29
+scene 595 juliet take 13
+596 kilo take 10
+597 lima take 6
+598 mike take 40
+599 november take 33
+scene 600 oscar take 3
+601 papa take 9
+602 quebec take 16
+scene 603 romeo take 17
+scene 604 sierra take 31
+605 tango take 22
+scene 606 uniform take 8
+scene 607 victor take 6
+scene 608 whiskey take 18
+609 xray take 38
+610 yankee take 36
+scene 611 zulu take 10
+scene 612 acorn take 11
+613 alfalfa take 15
+scene 614 almond take 39
+scene 615 anchovy take 3
+scene 616 anise take 15
+scene 617 appetizer take 24
+618 appetite take 10
+scene 619 apple take 26
+scene 620 apricot take 8
+621 artichoke take 19
+scene 622 asparagus take 5
+scene 623 aspic take 27
+scene 624 ate take 8
+625 avocado take 20
+626 bacon take 11
+scene 627 bagel take 11
+628 bake take 32
+629 baked take 2
+630 bamboo take 10
+scene 631 banana take 37
+scene 632 barbecue take 15
+scene 633 barley take 15
+scene 634 basil take 24
+scene 635 batter take 31
+636 beancurd take 24
+637 beans take 14
+638 beef take 9
+639 beet take 16
+640 bell take 17
+scene 641 berry take 2
+scene 642 biscuit take 30
+scene 643 bitter take 3
+644 black take 26
+645 blackberry take 12
+scene 646 black-eyed take 5
+scene 647 black take 15
+648 bland take 39
+scene 649 blood take 15
+scene 650 blueberry take 20
+651 boil take 5
+652 bowl take 29
+653 boysenberry take 11
+654 bran take 10
+scene 655 bread take 6
+scene 656 breadfruit take 39
+scene 657 breakfast take 10
+scene 658 brisket take 28
+659 broccoli take 23
+scene 660 broil take 5
+661 brownie take 24
+662 brown take 22
+scene 663 brunch take 37
+scene 664 Brussels take 20
+scene 665 buckwheat take 37
+666 buns take 35
+667 burrito take 26
+scene 668 butter take 29
+669 cake take 25
+670 calorie take 12
+scene 671 candy take 30
+672 cantaloupe take 28
+scene 673 capers take 23
+scene 674 caramel take 18
+675 carbohydrate take 23
+scene 676 carrot take 39
+scene 677 cashew take 22
+scene 678 cassava take 18
+679 casserole take 24
+scene 680 cater take 5
+681 cauliflower take 31
+682 caviar take 30
+683 cayenne take 27
+684 celery take 27
+scene 685 cereal take 30
+686 chard take 27
+687 cheddar take 1
+scene 688 cheese take 11
+689 cheesecake take 35
+scene 690 chef take 35
+691 cherry take 3
+692 chew take 4
+693 chicken take 3
+scene 694 chick peas take 17
+scene 695 chili take 13
+696 chips take 7
+scene 697 chives take 34
+698 chocolate take 14
+scene 699 chopsticks take 16
+700 chow take 2
+701 chutney take 3
+702 cilantro take 27
+scene 703 cinnamon take 20
+704 citron take 32
+705 citrus take 3
+706 clam take 1
+707 cloves take 24
+708 cobbler take 29
+scene 709 coconut take 23
+710 cod take 34
+scene 711 coffee take 37
+scene 712 coleslaw take 18
+713 collard take 21
+714 comestibles take 34
+715 cook take 10
+scene 716 cookbook take 27
+scene 717 cookie take 14
+scene 718 corn take 22
+719 cornflakes take 18
+scene 720 cornmeal take 23
+721 cottage take 14
+722 crab take 10
+scene 723 crackers take 4
+724 cranberry take 17
+725 cream take 17
+726 cream take 10
+scene 727 crepe take 1
+728 crisp take 38
+scene 729 crunch take 19
+scene 730 crust take 12
+scene 731 cucumber take 9
+scene 732 cuisine take 19
+733 cupboard take 35
+scene 734 cupcake take 13
+scene 735 curds take 10
+736 currants take 13
+scene 737 curry take 26
+738 custard take 14
+739 daikon take 19
+scene 740 dairy take 18
+scene 741 dandelion take 40
+scene 742 Danish pastry take 7
+scene 743 dates take 32
+744 dessert take 31
+745 diet take 32
+scene 746 digest take 35
+scene 747 digestive take 2
+scene 748 dill take 31
+749 dine take 26
+750 diner take 7
+751 dinner take 4
+scene 752 dip take 15
+753 dish take 27
+scene 754 dough take 32
+755 doughnut take 31
+756 dragonfruit take 6
+757 dressing take 18
+scene 758 dried take 31
+759 drink take 7
+scene 760 dry take 7
+scene 761 durian take 21
+762 eat take 12
+scene 763 Edam take 28
+scene 764 edible take 22
+765 egg take 25
+766 eggplant take 9
+scene 767 elderberry take 27
+768 endive take 20
+769 entree take 1
+scene 770 fast take 39
+771 fat take 4
+scene 772 fava take 34
+773 feast take 40
+scene 774 fed take 26
+775 feed take 8
+776 fennel take 30
+scene 777 fig take 35
+scene 778 fillet take 19
+scene 779 fire take 37
+scene 780 fish take 6
+scene 781 flan take 12
+782 flax take 20
+783 flour take 10
+784 food take 5
+785 food take 28
+786 foodstuffs take 11
+787 fork take 8
+788 freezer take 9
+scene 789 French take 21
+790 fried take 7
+scene 791 fritter take 26
+792 frosting take 15
+scene 793 fruit take 32
+scene 794 fry take 15
+scene 795 garlic take 3
+scene 796 gastronomy take 21
+scene 797 gelatin take 15
+scene 798 ginger take 40
+scene 799 gingerale take 37
+800 gingerbread take 23
+scene 801 glasses take 20
+802 Gouda take 34
+803 grain take 3
+804 granola take 35
+scene 805 grape take 1
+806 grapefruit take 30
+807 grated take 27
+808 gravy take 39
+809 greenbean take 24
+810 greens take 27
+scene 811 green take 15
+scene 812 grub take 20
+scene 813 guacamole take 40
+scene 814 guava take 14
+scene 815 gyro take 7
+scene 816 herbs take 10
+scene 817 halibut take 13
+scene 818 ham take 29
+819 hamburger take 23
+scene 820 hash take 30
+scene 821 hazelnut take 12
+822 herbs take 2
+scene 823 honey take 6
+scene 824 honeydew take 36
+scene 825 horseradish take 28
+scene 826 hot take 15
+827 hummus take 13
+scene 828 hunger take 19
+scene 829 hungry take 24
+scene 830 ice take 15
+831 iceberg take 21
+832 iced take 27
+scene 833 icing take 7
+scene 834 jackfruit take 37
+scene 835 jalapeno take 15
+scene 836 jam take 16
+837 jelly take 37
+838 jellybeans take 37
+scene 839 jicama take 33
+840 jimmies take 39
+841 Jordan take 31
+842 jug take 38
+scene 843 julienne take 2
+844 juice take 3
+845 junk take 34
+scene 846 kale take 40
+scene 847 kebab take 31
+848 ketchup take 35
+849 kettle take 33
+scene 850 kettle take 27
+scene 851 kidney take 30
+scene 852 kitchen take 35
+scene 853 kiwi take 10
+854 knife take 23
+855 kohlrabi take 31
+scene 856 kumquat take 31
+857 ladle take 18
+scene 858 lamb take 12
+scene 859 lard take 17
+scene 860 lasagna take 27
+861 legumes take 33
+scene 862 lemon take 29
+863 lemonade take 36
+864 lentils take 11
+865 lettuce take 1
+scene 866 licorice take 30
+867 lima take 27
+scene 868 lime take 16
+scene 869 liver take 15
+870 loaf take 35
+871 lobster take 20
+872 lollipop take 21
+scene 873 loquat take 26
+scene 874 lox take 11
+875 lunch take 6
+scene 876 lunch take 6
+scene 877 lunchmeat take 39
+878 lychee take 12
+879 macaroni take 17
+880 macaroon take 33
+881 main take 5
+882 maize take 1
+scene 883 mandarin take 16
+scene 884 mango take 21
+885 maple syrup take 11
+886 margarine take 35
+887 marionberry take 8
+888 marmalade take 33
+889 marshmallow take 2
+scene 890 mashed take 34
+scene 891 mayonnaise take 25
+892 meat take 19
+scene 893 meatball take 1
+scene 894 meatloaf take 13
+895 melon take 15
+scene 896 menu take 1
+scene 897 meringue take 6
+898 micronutrient take 5
+scene 899 milk take 11
+900 milkshake take 13
+901 millet take 14
+902 mincemeat take 27
+903 minerals take 39
+scene 904 mint take 34
+905 mints take 28
+906 mochi take 38
+907 molasses take 23
+908 mole sauce take 14
+909 mozzarella take 33
+910 muffin take 35
+911 mug take 26
+scene 912 munch take 18
+scene 913 mushroom take 25
+scene 914 mussels take 35
+915 mustard take 38
+916 mutton take 33
+scene 917 napkin take 36
+scene 918 nectar take 31
+scene 919 nectarine take 23
+scene 920 nibble take 25
+921 noodles take 12
+scene 922 nosh take 34
+923 nourish take 4
+924 nourishment take 5
+scene 925 nut take 8
+926 nutmeg take 2
+927 nutrient take 1
+928 nutrition take 27
+scene 929 nutritious take 30
+930 oats take 40
+931 oatmeal take 2
+scene 932 oil take 32
+933 okra take 4
+scene 934 oleo take 39
+scene 935 olive take 33
+936 omelet take 22
+937 omnivore take 6
+938 onion take 36
+939 orange take 6
+scene 940 order take 18
+scene 941 oregano take 21
+942 oven take 1
+943 oyster take 27
+944 pan take 22
+scene 945 pancake take 3
+scene 946 papaya take 6
+947 parsley take 10
+948 parsnip take 34
+949 pasta take 34
+scene 950 pastry take 36
+951 pate take 10
+scene 952 patty take 29
+953 pattypan take 1
+scene 954 peach take 34
+955 peanut take 16
+956 peanut take 13
+957 pea take 11
+958 pear take 27
+959 pecan take 8
+960 peapod take 17
+scene 961 pepper take 4
+962 pepperoni take 33
+scene 963 persimmon take 8
+964 pickle take 12
+965 picnic take 35
+scene 966 pie take 31
+967 pilaf take 29
+scene 968 pineapple take 30
+scene 969 pita take 38
+scene 970 pitcher take 39
+971 pizza take 33
+scene 972 plate take 16
+973 platter take 29
+974 plum take 25
+scene 975 poached take 11
+scene 976 pomegranate take 38
+scene 977 pomelo take 23
+978 pop take 35
+979 popsicle take 18
+980 popcorn take 7
+981 popovers take 5
+982 pork take 21
+scene 983 pot take 15
+984 potato take 2
+985 pot roast take 32
+scene 986 preserves take 15
+987 pretzel take 3
+scene 988 prime rib take 32
+scene 989 protein take 24
+990 provisions take 15
+scene 991 prune take 11
+992 pudding take 23
+scene 993 pumpernickel take 27
+scene 994 pumpkin take 33
+995 punch take 15
+scene 996 quiche take 29
+scene 997 quinoa take 3
+scene 998 queen take 19
+scene 999 radish take 10
+scene 1 alpha take 21
+scene 2 bravo take 14
+scene 3 charlie take 8
+scene 4 delta take 27
+scene 5 echo take 15
+scene 6 foxtrot take 8
+7 golf take 3
+8 hotel take 28
+scene 9 india take 24
+scene 10 juliet take 18
+scene 11 kilo take 32
+12 lima take 36
+scene 13 mike take 32
+scene 14 november take 31
+scene 15 oscar take 10
+16 papa take 24
+17 quebec take 10
+scene 18 romeo take 10
+19 sierra take 14
+1 alpha take 36
+scene 2 bravo take 30
+scene 3 charlie take 12
+scene 4 delta take 26
+scene 5 echo take 23
+6 foxtrot take 30
+7 golf take 6
+scene 8 hotel take 39
+9 india take 29
+scene 10 juliet take 32
+11 kilo take 6
+12 lima take 3
+scene 13 mike take 29
+scene 14 november take 40
+15 oscar take 28
+16 papa take 40
+scene 17 quebec take 5
+18 romeo take 8
+scene 19 sierra take 40
+1 alpha take 29
+2 bravo take 36
+scene 3 charlie take 35
+4 delta take 39
+scene 5 echo take 32
+6 foxtrot take 13
+7 golf take 21
+scene 8 hotel take 27
+9 india take 18
+scene 10 juliet take 28
+scene 11 kilo take 2
+12 lima take 33
+13 mike take 10
+14 november take 3
+scene 15 oscar take 5
+scene 16 papa take 16
+scene 17 quebec take 31
+scene 18 romeo take 15
+19 sierra take 33
+scene 1 alpha take 23
+2 bravo take 2
+3 charlie take 4
+scene 4 delta take 13
+5 echo take 17
+scene 6 foxtrot take 33
+7 golf take 14
+8 hotel take 25
+9 india take 14
+scene 10 juliet take 28
+11 kilo take 36
+12 lima take 1
+13 mike take 6
+14 november take 2
+scene 15 oscar take 23
+16 papa take 21
+scene 17 quebec take 18
+scene 18 romeo take 30
+scene 19 sierra take 29
+scene 1 alpha take 33
+scene 2 bravo take 23
+scene 3 charlie take 24
+scene 4 delta take 26
+scene 5 echo take 16
+6 foxtrot take 30
+scene 7 golf take 30
+scene 8 hotel take 31
+9 india take 24
+scene 10 juliet take 40
+11 kilo take 21
+scene 12 lima take 19
+13 mike take 7
+14 november take 30
+scene 15 oscar take 6
+16 papa take 34
+17 quebec take 18
+18 romeo take 17
+19 sierra take 20
+1 alpha take 10
+scene 2 bravo take 28
+3 charlie take 30
+scene 4 delta take 9
+scene 5 echo take 36
+6 foxtrot take 28
+7 golf take 35
+scene 8 hotel take 10
+scene 9 india take 5
+scene 10 juliet take 11
+11 kilo take 3
+scene 12 lima take 8
+scene 13 mike take 35
+14 november take 4
+scene 15 oscar take 15
+16 papa take 9
+17 quebec take 5
+18 romeo take 40
+19 sierra take 7
+scene 1 alpha take 37
+scene 2 bravo take 8
+scene 3 charlie take 8
+scene 4 delta take 14
+scene 5 echo take 11
+scene 6 foxtrot take 25
+7 golf take 13
+scene 8 hotel take 4
+9 india take 9
+10 juliet take 16
+scene 11 kilo take 9
+12 lima take 26
+scene 13 mike take 13
+scene 14 november take 38
+scene 15 oscar take 11
+scene 16 papa take 20
+17 quebec take 33
+18 romeo take 16
+scene 19 sierra take 12
+1 alpha take 22
+scene 2 bravo take 29
+scene 3 charlie take 21
+4 delta take 13
+scene 5 echo take 23
+6 foxtrot take 26
+7 golf take 30
+8 hotel take 24
+9 india take 21
+10 juliet take 2
+scene 11 kilo take 8
+scene 12 lima take 25
+scene 13 mike take 24
+scene 14 november take 11
+15 oscar take 20
+scene 16 papa take 5
+17 quebec take 16
+18 romeo take 16
+19 sierra take 8
+1 alpha take 22
+scene 2 bravo take 30
+scene 3 charlie take 31
+scene 4 delta take 22
+5 echo take 30
+scene 6 foxtrot take 16
+scene 7 golf take 9
+scene 8 hotel take 37
+scene 9 india take 21
+scene 10 juliet take 39
+scene 11 kilo take 15
+12 lima take 17
+13 mike take 6
+14 november take 14
+15 oscar take 23
+scene 16 papa take 9
+17 quebec take 35
+scene 18 romeo take 37
+19 sierra take 1
+scene 1 alpha take 36
+scene 2 bravo take 26
+3 charlie take 32
+scene 4 delta take 3
+scene 5 echo take 29
+6 foxtrot take 28
+7 golf take 39
+scene 8 hotel take 16
+scene 9 india take 25
+10 juliet take 17
+11 kilo take 31
+12 lima take 7
+13 mike take 1
+scene 14 november take 23
+15 oscar take 11
+scene 16 papa take 32
+17 quebec take 9
+scene 18 romeo take 38
+scene 19 sierra take 30
+1 alpha take 14
+scene 2 bravo take 11
+scene 3 charlie take 13
+scene 4 delta take 3
+scene 5 echo take 24
+6 foxtrot take 13
+scene 7 golf take 13
+8 hotel take 8
+9 india take 16
+scene 1 alpha take 7
+scene 2 bravo take 31
+3 charlie take 6
+4 delta take 10
+scene 5 echo take 3
+scene 6 foxtrot take 27
+7 golf take 24
+scene 8 hotel take 6
+scene 9 india take 6
+1 alpha take 34
+2 bravo take 13
+3 charlie take 23
+4 delta take 4
+scene 5 echo take 29
+6 foxtrot take 1
+7 golf take 13
+scene 8 hotel take 24
+9 india take 10
+scene 1 alpha take 22
+scene 2 bravo take 22
+scene 3 charlie take 19
+4 delta take 31
+5 echo take 27
+6 foxtrot take 28
+scene 7 golf take 38
+scene 8 hotel take 23
+scene 9 india take 10
+1 alpha take 24
+scene 2 bravo take 16
+scene 3 charlie take 7
+scene 4 delta take 34
+scene 5 echo take 9
+6 foxtrot take 40
+7 golf take 2
+scene 8 hotel take 12
+scene 9 india take 7
+1 alpha take 24
+2 bravo take 5
+scene 3 charlie take 37
+4 delta take 20
+scene 5 echo take 25
+6 foxtrot take 20
+7 golf take 18
+scene 8 hotel take 39
+scene 9 india take 19
+scene 1 alpha take 34
+2 bravo take 15
+scene 3 charlie take 29
+scene 4 delta take 36
+5 echo take 29
+6 foxtrot take 5
+scene 7 golf take 6
+scene 8 hotel take 18
+scene 9 india take 27
+scene 1 alpha take 26
+scene 2 bravo take 1
+3 charlie take 13
+4 delta take 35
+5 echo take 12
+6 foxtrot take 9
+7 golf take 38
+scene 8 hotel take 26
+9 india take 9
+1 alpha take 29
+2 bravo take 38
+scene 3 charlie take 23
+4 delta take 34
+scene 5 echo take 13
+6 foxtrot take 24
+7 golf take 27
+scene 8 hotel take 11
+scene 9 india take 18
+1 alpha take 1
+2 bravo take 30
+scene 3 charlie take 11
+scene 4 delta take 6
+scene 5 echo take 23
+6 foxtrot take 8
+7 golf take 23
+scene 8 hotel take 2
+9 india take 18
+1 alpha take 31
+scene 2 bravo take 27
+3 charlie take 35
+scene 4 delta take 18
+scene 5 echo take 40
+scene 6 foxtrot take 31
+7 golf take 22
+scene 8 hotel take 1
+scene 9 india take 16
+1 alpha take 11
+scene 2 bravo take 17
+3 charlie take 1
+4 delta take 39
+5 echo take 21
+6 foxtrot take 33
+7 golf take 8
+8 hotel take 26
+9 india take 7
+scene 1 alpha take 24
+scene 2 bravo take 26
+scene 3 charlie take 18
+4 delta take 33
+5 echo take 37
+scene 6 foxtrot take 3
+7 golf take 22
+8 hotel take 10
+9 india take 8
+1 alpha take 29
+scene 2 bravo take 5
+scene 3 charlie take 1
+4 delta take 6
+5 echo take 40
+6 foxtrot take 24
+7 golf take 15
+8 hotel take 28
+9 india take 25
+scene 1 alpha take 1
+2 bravo take 23
+3 charlie take 35
+scene 4 delta take 16
+scene 5 echo take 14
+scene 6 foxtrot take 35
+scene 7 golf take 39
+scene 8 hotel take 26
+scene 9 india take 4
+1 alpha take 23
+2 bravo take 22
+3 charlie take 14
+4 delta take 12
+scene 5 echo take 36
+scene 6 foxtrot take 22
+scene 7 golf take 5
+scene 8 hotel take 36
+9 india take 7
+scene 1 alpha take 30
+2 bravo take 1
+3 charlie take 12
+scene 4 delta take 37
+5 echo take 27
+scene 6 foxtrot take 14
+scene 7 golf take 14
+8 hotel take 22
+scene 9 india take 3
+scene 1 alpha take 37
+2 bravo take 40
+3 charlie take 27
+4 delta take 18
+scene 5 echo take 3
+scene 6 foxtrot take 21
+scene 7 golf take 2
+8 hotel take 36
+9 india take 9
+1 alpha take 34
+scene 2 bravo take 30
+3 charlie take 28
+scene 4 delta take 21
+5 echo take 33
+scene 6 foxtrot take 39
+7 golf take 15
+scene 8 hotel take 33
+scene 9 india take 7
+1 alpha take 10
+scene 2 bravo take 38
+scene 3 charlie take 1
+scene 4 delta take 36
+scene 5 echo take 5
+6 foxtrot take 17
+scene 7 golf take 18
+scene 8 hotel take 16
+scene 9 india take 20
