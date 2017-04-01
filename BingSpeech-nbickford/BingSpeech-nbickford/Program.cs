@@ -13,13 +13,19 @@ namespace BingSpeech_nbickford {
         static void Main(string[] args) {
             // Test code for running Microsoft's Cognitive Speech Services on an input audio file.
 
+            // Call this to set up the speech recognizer
             SpeechRecognizer recognizer = new SpeechRecognizer();
+
+            // Call this for each file you want to convert to text
             List<string> recognizedSpeech = recognizer.RecognizeSpeech(@"D:\N.B\Footage\Recordings\LA Hacks Ovation\s1bt2.wav");
 
             Console.WriteLine("Here are the phrases we recieved:");
             for (int i = 0; i < recognizedSpeech.Count; i++) {
                 Console.WriteLine(recognizedSpeech[i]);
             }
+
+            // SpeechRecognizer disposes the sound recognition engine automatically
+            // when it is destroyed.
 
             Console.WriteLine("Press ENTER to exit...");
             Console.ReadLine();
@@ -30,6 +36,7 @@ namespace BingSpeech_nbickford {
     class SpeechRecognizer{
         private string subscriptionKey = "fd25c649aae54f4aa902edb3a80a34d1";
         private string authenticationUri = ""; // according to the sample app, this is optional
+        private bool DEBUG = false; // For printing out debug information
 
         // Manual reset event for making the speech call synchronous
         ManualResetEvent oSignalEvent;
@@ -53,9 +60,17 @@ namespace BingSpeech_nbickford {
             parsedPhrases = new List<string>();
             oSignalEvent = new ManualResetEvent(false);
             
-            //TODO (neil): Partial responses and conversation errors
+            //TODO (neil): conversation errors
+            //TODO (neil): Check for Internet connection, error out if not available.
             //this.dataClient.OnPartialResponseReceived += this.OnPartialResponseReceivedHandler;
             //this.dataClient.OnConversationError += this.OnConversationErrorHandler;
+        }
+        
+        // Destuctor
+        ~SpeechRecognizer() {
+            if (dataClient != null) {
+                dataClient.Dispose();
+            }
         }
 
         public List<string> RecognizeSpeech(string inputFile) {
@@ -71,8 +86,11 @@ namespace BingSpeech_nbickford {
             // raw data (for example audio coming over bluetooth), then before sending up any 
             // audio data, you must first send up an SpeechAudioFormat descriptor to describe 
             // the layout and format of your raw audio data via DataRecognitionClient's sendAudioFormat() method.
+
+            // Length of buffer can be changed; currently set to 2 seconds at 44.1kHz.
+            // (This was originally set to 1024 samples)
             int bytesRead = 0;
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[88200];
 
             try {
                 do {
@@ -104,10 +122,11 @@ namespace BingSpeech_nbickford {
             WriteResponseResult(e);
 
             // Also copy-and pasted from the sample code.
-            Console.WriteLine("--- OnDataDictationResponseReceivedHandler ---");
+            if(DEBUG) Console.WriteLine("--- OnDataDictationResponseReceivedHandler ---");
+            if(DEBUG) Console.WriteLine(e.PhraseResponse.RecognitionStatus);
             if (e.PhraseResponse.RecognitionStatus == RecognitionStatus.EndOfDictation || //TODO (neil) Should this be changed?
                 e.PhraseResponse.RecognitionStatus == RecognitionStatus.DictationEndSilenceTimeout) {
-                Console.WriteLine("We have final result!");
+                if(DEBUG) Console.WriteLine("We have final result!");
                 oSignalEvent.Set();
 
                 /*Dispatcher.Invoke(
@@ -128,25 +147,22 @@ namespace BingSpeech_nbickford {
         /// <param name="e">The <see cref="SpeechResponseEventArgs"/> instance containing the event data.</param>
         private void WriteResponseResult(SpeechResponseEventArgs e) {
             if (e.PhraseResponse.Results.Length == 0) {
-                Console.WriteLine("No phrase response is available.");
+                if(DEBUG) Console.WriteLine("No phrase response is available.");
             } else {
-                Console.WriteLine("********* Final n-BEST Results *********");
-                for (int i = 0; i < e.PhraseResponse.Results.Length; i++) {
-                    Console.WriteLine(
-                        "[{0}] Confidence={1}, Text=\"{2}\"",
-                        i,
-                        e.PhraseResponse.Results[i].Confidence,
-                        e.PhraseResponse.Results[i].LexicalForm);
+                if (DEBUG) {
+                    Console.WriteLine("********* Final n-BEST Results *********");
+                    for (int i = 0; i < e.PhraseResponse.Results.Length; i++) {
+                        Console.WriteLine(
+                            "[{0}] Confidence={1}, Text=\"{2}\"",
+                            i,
+                            e.PhraseResponse.Results[i].Confidence,
+                            e.PhraseResponse.Results[i].LexicalForm);
+                    }
+                    Console.WriteLine();
                 }
+
                 parsedPhrases.Add(e.PhraseResponse.Results[0].LexicalForm);
 
-                Console.WriteLine();
-            }
-        }
-
-        public void Dispose() {
-            if (dataClient != null) {
-                dataClient.Dispose();
             }
         }
     }
