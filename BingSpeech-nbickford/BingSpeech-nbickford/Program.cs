@@ -18,6 +18,10 @@ namespace BingSpeech_nbickford {
                 Console.WriteLine(recognizedSpeech[i]);
             }
 
+            Console.WriteLine("As a single string:");
+            string singleString = String.Join(" ", recognizedSpeech);
+            Console.WriteLine(singleString);
+
             // SpeechRecognizer disposes the sound recognition engine automatically
             // when it is destroyed.
 
