@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Destination Button.png" />
+    <Content Include="Resources\eDIT.png" />
     <Content Include="Resources\Icon Close.png" />
     <None Include="Resources\Logo 2561.png" />
     <None Include="Resources\Logo 481.png" />
