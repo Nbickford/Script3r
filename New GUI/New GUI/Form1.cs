@@ -77,7 +77,37 @@ namespace New_GUI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
+        }
 
+        private void MainPage_Load(object sender, EventArgs e) {
+            // Load in the previous output directory from settings.txt (if it exists)
+            string directoryName = LoadOutputDirectoryName();
+            DestinationBox.Text = directoryName;
+        }
+
+        private string LoadOutputDirectoryName() {
+            if (File.Exists("settings.txt")) {
+                string[] lines = File.ReadAllLines("settings.txt"); //TODO(neil): line length?
+                if (lines.Length > 0) {
+                    if (Directory.Exists(lines[0])) {
+                        return lines[0];
+                    }
+                }
+            }
+            return "";
+        }
+
+        private void SaveOutputDirectoryName(string dirName) {
+            if (Directory.Exists(dirName)) {
+                try {
+                    TextWriter tw = new StreamWriter("settings.txt");
+                    tw.Write(dirName);
+                    tw.Close();
+                }catch(Exception ex) {
+                    //... ehh
+                }
+            }
         }
 
         // Process all files in the directory passed in, recurse on any directories
@@ -254,6 +284,8 @@ namespace New_GUI
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            SaveOutputDirectoryName(DestinationBox.Text);
+
             foreach (string path in files_to_move)
             {
 
@@ -401,11 +433,6 @@ namespace New_GUI
         }
 
         private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MainPage_Load(object sender, EventArgs e)
         {
 
         }
