@@ -53,6 +53,7 @@ namespace Script3rSpeech
         public List<string> RecognizeSpeech(string inputFile)
         {
             //TODO (neil): Input file verification
+            parsedPhrases = new List<string>();
 
             //Read the file into memory in blocks and send to the services API.
             // This is copy-and pasted from the sample code.
@@ -64,6 +65,8 @@ namespace Script3rSpeech
             // raw data (for example audio coming over bluetooth), then before sending up any 
             // audio data, you must first send up an SpeechAudioFormat descriptor to describe 
             // the layout and format of your raw audio data via DataRecognitionClient's sendAudioFormat() method.
+
+            //this.dataClient.AudioStart();
 
             // Length of buffer can be changed; currently set to 2 seconds at 44.1kHz.
             // (This was originally set to 1024 samples)
@@ -87,6 +90,8 @@ namespace Script3rSpeech
                 // We are done sending audio.  Final recognition results will arrive in OnResponseReceived event call.
                 this.dataClient.EndAudio();
             }
+
+            this.dataClient.AudioStop();
 
             fileStream.Close();
 
