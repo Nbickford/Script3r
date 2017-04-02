@@ -113,6 +113,7 @@
     <None Include="Resources\Title Image.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Destination Button.png" />
     <Content Include="Resources\Icon Close.png" />
     <None Include="Resources\Logo 2561.png" />
     <None Include="Resources\Logo 481.png" />
@@ -123,10 +124,9 @@
     <Content Include="Resources\Logo 48.png" />
     <Content Include="Resources\SCRIPT3R TEXT.png" />
     <None Include="Resources\SCRIPT3R TEXT1.png" />
-	<Content Include="ffmpeg.exe">
-    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="ffmpeg.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

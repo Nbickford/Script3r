@@ -134,9 +134,16 @@ namespace New_GUI
         
         private void clear_Click_1(object sender, EventArgs e)
         {
-            InputBox.Text = "";
-            files_to_move.Clear();
-            source_file_dict.Clear();
+            var confirmResult = MessageBox.Show("Are you sure you want to clear you selections?",
+                                     "Confirm Clear!",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                // If 'Yes', do something here.
+                InputBox.Text = "";
+                files_to_move.Clear();
+                source_file_dict.Clear();
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
