@@ -17,7 +17,7 @@ namespace New_GUI
     {
         private FolderBrowserDialog fbd;
         private List<string> files_to_move;
-        private Dictionary<string, List<string>> source_file_dict;
+        private Dictionary<string, string[]> source_file_dict;
         private string destination;
         private SpeechRecognizer recognizer;
 
@@ -29,7 +29,7 @@ namespace New_GUI
             textBox2.DragDrop += new DragEventHandler(textBox_DragDrop);
             this.fbd = new FolderBrowserDialog();
             this.files_to_move = new List<string> { };
-            this.source_file_dict = new Dictionary<string, List<string>> { };
+            this.source_file_dict = new Dictionary<string, string[]> { };
             this.destination = "";
             this.recognizer = new SpeechRecognizer();
         }
@@ -58,7 +58,7 @@ namespace New_GUI
                 string transcribed = String.Join(" ",this.recognizer.RecognizeSpeech(path));
                 
                 source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
-
+                Console.WriteLine("test");
             }
         }
 
