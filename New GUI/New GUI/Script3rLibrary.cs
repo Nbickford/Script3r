@@ -22,7 +22,8 @@ namespace Script3rLibrary {
                 {"THOUSAND", 1000},
                 {"HUNDRED", 100}
             };
-
+            if (words[0] == "AND")
+                return -1;
             if (words.Length >= 2) {
                 if (ones.Contains(words[0]) && tens.Contains(words[1])) {
                     string[] words2 = new string[words.Length + 1];
@@ -133,9 +134,9 @@ namespace Script3rLibrary {
             while (!IsNum(sceneWord) && sceneWord.Length >= 1)
             {
                 fileData[1] = sceneWord[0].ToString(); // get the first letter
-                prevSpace = transcript.LastIndexOf(' ', prevSpace - 1);
-                if (prevSpace < -1)
+                if (prevSpace <= -1)
                     break;
+                prevSpace = transcript.LastIndexOf(' ', prevSpace - 1);                
                 sceneWord = transcript.Substring(prevSpace + 1, transcript.IndexOf(sceneWord) - prevSpace - 1);
             }
 
