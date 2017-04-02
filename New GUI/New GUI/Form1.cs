@@ -291,7 +291,7 @@ namespace New_GUI
             FillMissingInformation();
 
             file_move.move_and_org(files_to_move, source_file_dict, destination);
-            Environment.Exit(0);
+            CloseApplication();
         }
 
         private void textBox2_Click(object sender, EventArgs e)
@@ -339,8 +339,7 @@ namespace New_GUI
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-
-            Application.Exit();
+            CloseApplication();
         }
 
         private void MinimizeWindow_Click(object sender, EventArgs e)
@@ -409,6 +408,13 @@ namespace New_GUI
         private void MainPage_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void CloseApplication() {
+            // Dispose objects, shut down the application
+            recognizer.Dispose();
+            // Application.Exit();
+            Environment.Exit(0);
         }
     }
 }
