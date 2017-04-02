@@ -144,15 +144,24 @@ namespace Script3rLibrary {
     public class file_move {
         public static void move_and_org(List<string> files_to_move, Dictionary<string, string[]> source_file_dict, string destination) {
             foreach (string path in files_to_move) {
-                if (source_file_dict[path][0] == "match_fail") {
+                if (source_file_dict[path][0] == "match_fail" || source_file_dict[path][1] == "match_fail")
+                {
                     System.IO.Directory.CreateDirectory(destination + "\\match_fail");
                     File.Move(path, destination + "\\match_fail\\" + Path.GetFileName(path));
-                } else {
-                    string scene = source_file_dict[path][0];
-                    string take = source_file_dict[path][1];
+                }
+                else if (source_file_dict[path][2] == "match_fail") {
+                    string scene_num = source_file_dict[path][0];
+                    string scene_letter = source_file_dict[path][1];
+                    System.IO.Directory.CreateDirectory(destination + "\\Scene_" + scene_num + scene_letter);
+                    File.Move(path, destination + "\\Scene_" + scene_num + scene_letter + "\\" + Path.GetFileName(path));
+                }
+                else {
+                    string scene_num = source_file_dict[path][0];
+                    string scene_letter = source_file_dict[path][1];
+                    string take = source_file_dict[path][2];
                     string extention = Path.GetExtension(path);
-                    System.IO.Directory.CreateDirectory(destination + "\\" + "Scene_" + scene);
-                    File.Move(path, destination + "\\" + "Scene_" + scene + "\\" + scene + "_" + take + extention);
+                    System.IO.Directory.CreateDirectory(destination + "\\Scene_" + scene_num + scene_letter);
+                    File.Move(path, destination + "\\Scene_" + scene_num + scene_letter + "\\" + scene_num + scene_letter + "_" + take + extention);
                 }
             }
         }

@@ -126,7 +126,7 @@ namespace New_GUI
                     File.Delete(outPath);
                 }
 
-                textBox2.Text += transcribed;
+                textBox2.Text += transcribed + "\r\n\r\n";
 
                 source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
             }
