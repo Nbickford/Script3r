@@ -50,6 +50,12 @@ namespace Script3rSpeech
             }
         }
 
+        public void Dispose() {
+            if (dataClient != null) {
+                dataClient.Dispose();
+            }
+        }
+
         public List<string> RecognizeSpeech(string inputFile)
         {
             //TODO (neil): Input file verification
@@ -140,6 +146,7 @@ namespace Script3rSpeech
             switch (e.PhraseResponse.RecognitionStatus) {
                 case RecognitionStatus.EndOfDictation:
                 case RecognitionStatus.DictationEndSilenceTimeout:
+                case RecognitionStatus.RecognitionSuccess:
                     if (DEBUG) Console.WriteLine("We have final result!");
                     Succeeded = true;
                     runAgain = false;
@@ -175,6 +182,9 @@ namespace Script3rSpeech
                     runAgain = false;
                     Succeeded = false;
                     //oSignalEvent.Set(); <- why does it keep running after this???
+                    break;
+                default:
+                    message = "Unknown message type: "+e.PhraseResponse.ToString();
                     break;
             }
         }

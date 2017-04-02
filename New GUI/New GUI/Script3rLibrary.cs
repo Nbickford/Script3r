@@ -76,9 +76,11 @@ namespace Script3rLibrary {
         }
 
         //parses audio string to return string list of Scene Number/Letter and Take number OR returns match_fail
-        public static string[] SearchStr(string transcript) {
+        public static string[] SearchStr(string transcript)
+        {
             var fileData = new string[3]; // scene number, scene letter, take number
-            for(int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++)
+            {
                 fileData[i] = "match_fail";
             }
 
@@ -91,7 +93,8 @@ namespace Script3rLibrary {
             //# search for "take"
 
             int position = transcript.IndexOf(" TAKE ");
-            if (position == -1) {
+            if (position == -1)
+            {
                 return fileData;
             }
 
@@ -103,29 +106,29 @@ namespace Script3rLibrary {
             //Positiont starts at a letter; find the next word, and see if it's a number word. 
             //expands to the next word and checks iteratively
             int nextSpace = transcript.IndexOf(' ', positiont);
-            if (nextSpace!=-1)
+            if (nextSpace != -1)
             {
                 takeNum = transcript.Substring(positiont, nextSpace - positiont);
                 while (IsNum(takeNum))
-                    {
-                        fileData[2] = ParseEnglish(takeNum).ToString();
-                        nextSpace = transcript.IndexOf(' ', nextSpace + 1);
-                        if (nextSpace == -1)
-                            break;
-                        takeNum = transcript.Substring(transcript.IndexOf(takeNum),nextSpace-transcript.IndexOf(takeNum));
-                    }
-             }
+                {
+                    fileData[2] = ParseEnglish(takeNum).ToString();
+                    nextSpace = transcript.IndexOf(' ', nextSpace + 1);
+                    if (nextSpace == -1)
+                        break;
+                    takeNum = transcript.Substring(transcript.IndexOf(takeNum), nextSpace - transcript.IndexOf(takeNum));
+                }
+            }
 
             //# increment backwards to get the next term for sceneword
             //If we're at the beginning... well, we can't really go back.
             if (position <= 1) return fileData;
             string sceneWord = "";
 
-            int prevSpace = transcript.LastIndexOf(' ', position-1);
+            int prevSpace = transcript.LastIndexOf(' ', position - 1);
             if (prevSpace == -1)
                 return fileData;
 
-            sceneWord = transcript.Substring(prevSpace, position-prevSpace);
+            sceneWord = transcript.Substring(prevSpace + 1, position - prevSpace);
             //If the scene word is a number, we've accidentally read the scene number.
             while (!IsNum(sceneWord) && sceneWord.Length >= 1)
             {
@@ -133,7 +136,7 @@ namespace Script3rLibrary {
                 prevSpace = transcript.LastIndexOf(' ', prevSpace - 1);
                 if (prevSpace < -1)
                     break;
-                sceneWord = transcript.Substring(prevSpace + 1, transcript.IndexOf(sceneWord)-prevSpace-1);
+                sceneWord = transcript.Substring(prevSpace + 1, transcript.IndexOf(sceneWord) - prevSpace - 1);
             }
 
             position = transcript.IndexOf(sceneWord);
@@ -141,13 +144,13 @@ namespace Script3rLibrary {
             if (IsNum(sceneWord))
             {
                 sceneNum = sceneWord;
-                while(IsNum(sceneNum))
+                while (IsNum(sceneNum))
                 {
                     fileData[0] = ParseEnglish(sceneNum).ToString();
                     prevSpace = transcript.LastIndexOf(' ', prevSpace - 1);
                     if (prevSpace < -1)
                         break;
-                    sceneNum = transcript.Substring(prevSpace + 1, sceneNum.Length+transcript.IndexOf(sceneNum)-prevSpace-2);
+                    sceneNum = transcript.Substring(prevSpace + 1, sceneNum.Length + transcript.IndexOf(sceneNum) - prevSpace - 1);
                 }
             }
 
