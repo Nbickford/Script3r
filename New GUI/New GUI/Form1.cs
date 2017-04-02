@@ -54,11 +54,6 @@ namespace New_GUI
                     // This path is a directory
                     ProcessDirectory(path);
                 }
-
-                string transcribed = String.Join(" ",this.recognizer.RecognizeSpeech(path));
-                
-                source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
-
             }
         }
 
@@ -108,6 +103,15 @@ namespace New_GUI
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            foreach (string path in files_to_move)
+            {
+                string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(path));
+
+                textBox2.Text += transcribed;
+
+                source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
+            }
+
             file_move.move_and_org(files_to_move, source_file_dict, destination);
         }
     }
