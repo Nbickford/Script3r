@@ -291,52 +291,80 @@ namespace New_GUI
         }
 
         private void button2_Click_1(object sender, EventArgs e)
-        {if (push == false)
+        {
+            if (push == false)
             {
                 push = true;
                 SaveOutputDirectoryName(DestinationBox.Text);
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
 
-                foreach (string path in files_to_move)
-                {
+        // Main processing stage, run from the backgroundWorker.
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) {
+            foreach (string path in files_to_move) {
 
-                    string exPath = Application.StartupPath + "\\";
+                string exPath = Application.StartupPath + "\\";
 
-                    string outPath = exPath + "temporary.wav";
-                    int x = 0;
-                    while (File.Exists(outPath))
-                    {
-                        x++;
-                        outPath = exPath + "temporary" + x + ".wav";
-                    }
-
-                    string cmdText = "/c ffmpeg -ss 0 -i " + "\"" + path + "\"" + " -t 30 -acodec pcm_s16le -ac 1 -ar 16000 " + "\"" + outPath + "\"";
-                    string pee = cmdText;
-                    Process pro = Process.Start("CMD.exe", cmdText);
-                    pro.WaitForExit();
-
-                    string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
-
-                    if (File.Exists(outPath))
-                    {
-                        File.Delete(outPath);
-                    }
-
-
-                    //DEBUG (neil, Vincent): Print out recognition result info to textbox.
-                    InputBox.Text += recognizer.message + "\r\n";
-                    InputBox.Text += recognizer.lastSpeechStatus + "\r\n";
-                    InputBox.Text += "Succeeded: " + recognizer.Succeeded;
-                    InputBox.Text += transcribed + "\r\n\r\n";
-
-                    source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
+                string outPath = exPath + "temporary.wav";
+                int x = 0;
+                while (File.Exists(outPath)) {
+                    x++;
+                    outPath = exPath + "temporary" + x + ".wav";
                 }
 
-                //TODO (neil): Export files as soon as we have all three parts of their information.
-                FillMissingInformation();
+                string cmdText = "/c ffmpeg -ss 0 -i " + "\"" + path + "\"" + " -t 30 -acodec pcm_s16le -ac 1 -ar 16000 " + "\"" + outPath + "\"";
+                string pee = cmdText;
+                Process pro = Process.Start("CMD.exe", cmdText);
+                pro.WaitForExit();
 
-                file_move.move_and_org(files_to_move, source_file_dict, destination);
-                CloseApplication();
+                string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
+
+                if (File.Exists(outPath)) {
+                    File.Delete(outPath);
+                }
+
+
+                //DEBUG (neil, Vincent): Print out recognition result info to textbox.
+                AppendTextAsync(recognizer.message + "\r\n");
+                AppendTextAsync(recognizer.lastSpeechStatus + "\r\n");
+                AppendTextAsync("Succeeded: " + recognizer.Succeeded + "\r\n");
+                AppendTextAsync(transcribed + "\r\n\r\n");
+
+                source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
             }
+
+            //TODO (neil): Export files as soon as we have all three parts of their information.
+            //TODO: Print progress information.
+            FillMissingInformation();
+
+            file_move.move_and_org(files_to_move, source_file_dict, destination);
+        }
+
+        // From https://msdn.microsoft.com/en-us/library/ms171728(v=vs.110).aspx
+        delegate void StringArgReturningVoidDelegate(string text);
+
+        //This is tricky.
+        private void AppendTextAsync(string text) {
+            // InvokeRequired required compares the thread ID of the  
+            // calling thread to the thread ID of the creating thread.  
+            // If these threads are different, it returns true.  
+            if (this.InputBox.InvokeRequired) {
+                StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(AppendTextAsync);
+                this.Invoke(d, new object[] { text });
+            } else {
+                this.InputBox.Text += text;
+            }
+        }
+
+        // Callback to the main form.
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
+            if (e.Error != null) {
+                MessageBox.Show("The background thread ran into an error!\n" +
+                    "Here it is, for the developers: \n" +
+                    e.Error.ToString());
+            }
+            CloseApplication();
         }
 
         private void textBox2_Click(object sender, EventArgs e)
