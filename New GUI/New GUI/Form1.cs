@@ -365,6 +365,14 @@ namespace New_GUI
                     "Here it is, for the developers: \n" +
                     e.Error.ToString());
             }
+            // Open the output Windows Explorer directory, showing all of the files in their properly sorted order.
+            Process p = new Process();
+            p.StartInfo.FileName = "explorer.exe";
+            p.StartInfo.Arguments = "file:\\\\" + destination;
+            p.Start();
+
+            //TODO: Re-enable checkboxes and text fields so that we can add more files and keep on going,
+            // or close the application.
             CloseApplication();
         }
 
