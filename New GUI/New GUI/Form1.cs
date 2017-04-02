@@ -183,7 +183,7 @@ namespace New_GUI
                 string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
                 if(File.Exists(outPath))
                 {
-                    File.Delete(outPath);
+                    File.Delete(outPath);   
                 }               
 
                 textBox2.Text += transcribed + "\r\n\r\n";
