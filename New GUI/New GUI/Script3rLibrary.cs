@@ -76,13 +76,12 @@ namespace Script3rLibrary {
         }
 
         //parses audio string to return string list of Scene Number/Letter and Take number OR returns match_fail
-        public static string[] SearchStr(string audio) {
+        public static string[] SearchStr(string transcript) {
             var fileData = new string[3]; // scene number, scene letter, take number
             for(int i = 0; i < 3; i++) {
                 fileData[i] = "match_fail";
             }
 
-            string transcript = audio;
             //# replace every homophone of two with two
 
             transcript = transcript.Replace(" too ", " two ");
@@ -91,120 +90,52 @@ namespace Script3rLibrary {
 
             //# search for "take"
 
-            int position = transcript.IndexOf(" TAKE ");
+            int position = transcript.IndexOf("TAKE ");
             if (position == -1) {
                 return fileData;
             }
 
             //# starting from next character, increment until next space to get takenum
             //TODO (neil): clean this up
-
-            int positiont = position + 6;
-            int end = positiont;
+            int positiont = position + 5;
             string takeNum = "";
-            bool wasNum = false;
-            string lastNum = "";
-            while (end < transcript.Length) {
-                while (transcript[end] != ' ') {
-                    end = end + 1;
-                    takeNum = transcript.Substring(positiont, end - positiont);
 
-                    if (end == transcript.Length) {
-                        if (IsNum(takeNum)) {
-                            break;
-                        } else {
-                            if (wasNum == false) {
-                                //break
-                                return fileData;
-                            } else {
-                                takeNum = lastNum;
-                                break;
-                            }
-
-                        }
-                    }
-                }
+            //Positiont starts at a letter; find the next word, and see if it's a number word.
+            int nextSpace = transcript.IndexOf(' ', positiont);
+            if (nextSpace != -1) {
+                takeNum = transcript.Substring(positiont, nextSpace - positiont);
                 if (IsNum(takeNum)) {
-                    wasNum = true;
-                    lastNum = takeNum;
+                    fileData[2] = ParseEnglish(takeNum).ToString();
                 }
-                end = end + 1;
             }
-
-            if (wasNum == false) {
-                //break
-                return fileData;
-            }
-
-            fileData[2] = ParseEnglish(takeNum).ToString();
 
             //# increment backwards to get the next term for sceneword
+            //If we're at the beginning... well, we can't really go back.
+            if (position <= 1) return fileData;
+            position--; //position should now be a space
             string sceneWord = "";
-            string lastWord = "";
+
+            int prevSpace = transcript.LastIndexOf(' ', position-1);
+            prevSpace++; // this is a letter if there's a word, and the beginning of the file otherwise.
+            sceneWord = transcript.Substring(prevSpace, position - prevSpace);
+
+            //If the scene word is a number, we've accidentally read the scene number.
+            if (!IsNum(sceneWord) && sceneWord.Length >= 1) {
+                fileData[1] = sceneWord[0].ToString(); // get the first letter
+                position = prevSpace-1; // position should now be a space
+            }
+
+            //# increment backwards to get scene number
             string sceneNum = "";
-            end = position;
+            if (position <= 0) return fileData;
 
-            while (position > 0) {
-                while (transcript[position] != ' ') {
-                    position = position - 1;
-                    sceneWord = transcript.Substring(position, end - position);
-                    if (position == 0) {
-                        if (!IsNum(sceneWord)) {
-                            fileData[1] = "match_fail";
-                            return fileData;
-                        }
-                        break;
-                    }
-                }
-                if (IsNum(sceneWord)) {
-                    sceneWord = lastWord;
-                    break;
-                } else {
-                    lastWord = sceneWord;
-                }
-                end = position;
-                position = position - 1;
-            }
+            prevSpace = transcript.LastIndexOf(' ', position-1);
+            prevSpace++; // should now start at a letter
+            sceneNum = transcript.Substring(prevSpace, position - prevSpace);
 
-            if (sceneWord.Length >= 1) {
-                fileData[1] = sceneWord[1].ToString();
-            }
-
-            //# increment backwords to get scene number
-            sceneNum = transcript.Substring(position, end - position);
             if (IsNum(sceneNum)) {
-                wasNum = true;
-                lastNum = sceneNum;
-            } else {
-                wasNum = false;
-                lastNum = "";
+                fileData[0] = ParseEnglish(sceneNum).ToString();
             }
-
-
-            while (position > 0) {
-                while (transcript[position] != ' ') {
-                    position = position - 1;
-                    sceneNum = transcript.Substring(position, end - position);
-                    if (position == 0) {
-                        if (IsNum(sceneNum)) {
-                            break;
-                        } else if (wasNum == true) {
-                            sceneNum = lastNum;
-                            break;
-                        } else {
-                            fileData[0] = "match_fail";
-                            return fileData;
-                        }
-                    }
-                }
-                if (IsNum(sceneNum)) {
-                    wasNum = true;
-                    lastNum = sceneNum;
-                }
-                position = position - 1;
-            }
-
-            fileData[0] = ParseEnglish(sceneNum).ToString();
 
             return fileData;
         }

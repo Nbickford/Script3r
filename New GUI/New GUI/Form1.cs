@@ -101,6 +101,9 @@ namespace New_GUI
             }
         }
 
+        private void FillMissingInformation() {
+        }
+
         private void button2_Click_1(object sender, EventArgs e)
         {
             foreach (string path in files_to_move)
@@ -111,6 +114,9 @@ namespace New_GUI
 
                 source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
             }
+
+            //TODO (neil): Export files as soon as we have all three parts of their information.
+            FillMissingInformation();
 
             file_move.move_and_org(files_to_move, source_file_dict, destination);
         }
