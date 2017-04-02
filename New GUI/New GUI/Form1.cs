@@ -54,14 +54,6 @@ namespace New_GUI
                     // This path is a directory
                     ProcessDirectory(path);
                 }
-<<<<<<< HEAD
-=======
-
-                string transcribed = String.Join(" ",this.recognizer.RecognizeSpeech(path));
-                
-                source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
-                Console.WriteLine("test");
->>>>>>> origin/master
             }
         }
 
