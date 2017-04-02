@@ -13,7 +13,8 @@ namespace Script3rSpeech
         public RecognitionStatus lastSpeechStatus;
         public string message = "";
 
-        private string subscriptionKey = "fd25c649aae54f4aa902edb3a80a34d1";
+        private string subscriptionKey = "6bb55c70a5e74603be1397e0473ecbd6";//"fd25c649aae54f4aa902edb3a80a34d1";
+        private string websocketUri = "https://63e3a2a4b7b34a74a3843746b19335f5.api.cris.ai/ws/cris/speech/recognize";
         private string authenticationUri = ""; // according to the sample app, this is optional
         private bool DEBUG = false; // For printing out debug information
 
@@ -58,11 +59,18 @@ namespace Script3rSpeech
             message = "Running...";
 
             for (int numTries = 3; numTries > 0 && runAgain; numTries--) {
-                this.dataClient = SpeechRecognitionServiceFactory.CreateDataClient(
+                /*this.dataClient = SpeechRecognitionServiceFactory.CreateDataClient(
                 SpeechRecognitionMode.LongDictation,
                 "en-us",
-                subscriptionKey);
-                dataClient.AuthenticationUri = authenticationUri;
+                subscriptionKey, websocketUri);*/
+                dataClient = SpeechRecognitionServiceFactory.CreateDataClient(
+                    SpeechRecognitionMode.ShortPhrase,
+                    "en-us",
+                    subscriptionKey,
+                    subscriptionKey,
+                    websocketUri);
+                //dataClient.
+                dataClient.AuthenticationUri = "https://westus.api.cognitive.microsoft.com/sts/v1.0/issueToken";
 
                 dataClient.OnResponseReceived += OnDataDictationResponseReceivedHandler;
 
