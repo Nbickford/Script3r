@@ -136,6 +136,9 @@ namespace New_GUI
         
         private void clear_Click_1(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+            button2.Enabled = false;
+            clear.Enabled = false;
             var confirmResult = MessageBox.Show("Are you sure you want to clear you selections?",
                                      "Confirm Clear!",
                                      MessageBoxButtons.YesNo);
@@ -146,16 +149,25 @@ namespace New_GUI
                 files_to_move.Clear();
                 source_file_dict.Clear();
             }
+            button1.Enabled = true;
+            button2.Enabled = true;
+            clear.Enabled = true;
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+            button2.Enabled = false;
+            clear.Enabled = false;
             DialogResult result = fbd.ShowDialog();
             if (result == DialogResult.OK)
             {
                 DestinationBox.Text = fbd.SelectedPath;
                 this.destination = fbd.SelectedPath;
             }
+            button1.Enabled = true;
+            button2.Enabled = true;
+            clear.Enabled = true;
         }
 
         // ASSUMES: x and y are not both empty.
@@ -293,12 +305,17 @@ namespace New_GUI
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (push == false)
-            {
-                push = true;
-                SaveOutputDirectoryName(DestinationBox.Text);
-                backgroundWorker1.RunWorkerAsync();
-            }
+            button2.Enabled = false;
+            button1.Enabled = false;
+            clear.Enabled = false;
+            
+            push = true;                              
+            SaveOutputDirectoryName(DestinationBox.Text);
+            backgroundWorker1.RunWorkerAsync();
+        
+            button2.Enabled = true;
+            button1.Enabled = true;
+            clear.Enabled = true;
         }
 
         // Main processing stage, run from the backgroundWorker.
