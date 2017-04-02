@@ -8,6 +8,11 @@ namespace Script3rSpeech
 {
     class SpeechRecognizer
     {
+        public bool Succeeded = false;
+        private bool runAgain = false;
+        public RecognitionStatus lastSpeechStatus;
+        public string message = "";
+
         private string subscriptionKey = "fd25c649aae54f4aa902edb3a80a34d1";
         private string authenticationUri = ""; // according to the sample app, this is optional
         private bool DEBUG = false; // For printing out debug information
@@ -24,13 +29,7 @@ namespace Script3rSpeech
 
         public SpeechRecognizer()
         {
-            this.dataClient = SpeechRecognitionServiceFactory.CreateDataClient(
-                SpeechRecognitionMode.LongDictation,
-                "en-us",
-                subscriptionKey);
-            dataClient.AuthenticationUri = authenticationUri;
-
-            dataClient.OnResponseReceived += OnDataDictationResponseReceivedHandler;
+            
 
             parsedPhrases = new List<string>();
             oSignalEvent = new ManualResetEvent(false);
@@ -54,50 +53,64 @@ namespace Script3rSpeech
         {
             //TODO (neil): Input file verification
             parsedPhrases = new List<string>();
+            Succeeded = false;
+            runAgain = true;
+            message = "Running...";
 
-            //Read the file into memory in blocks and send to the services API.
-            // This is copy-and pasted from the sample code.
-            // Input file must be a WAV.
-            FileStream fileStream = new FileStream(inputFile, FileMode.Open, FileAccess.Read);
+            for (int numTries = 3; numTries > 0 && runAgain; numTries--) {
+                this.dataClient = SpeechRecognitionServiceFactory.CreateDataClient(
+                SpeechRecognitionMode.LongDictation,
+                "en-us",
+                subscriptionKey);
+                dataClient.AuthenticationUri = authenticationUri;
 
-            // Note for wave files, we can just send data from the file right to the server.
-            // In the case you are not an audio file in wave format, and instead you have just
-            // raw data (for example audio coming over bluetooth), then before sending up any 
-            // audio data, you must first send up an SpeechAudioFormat descriptor to describe 
-            // the layout and format of your raw audio data via DataRecognitionClient's sendAudioFormat() method.
+                dataClient.OnResponseReceived += OnDataDictationResponseReceivedHandler;
 
-            //this.dataClient.AudioStart();
+                parsedPhrases.Clear();
+                //Read the file into memory in blocks and send to the services API.
+                // This is copy-and pasted from the sample code.
+                // Input file must be a WAV.
+                FileStream fileStream = new FileStream(inputFile, FileMode.Open, FileAccess.Read);
 
-            // Length of buffer can be changed; currently set to 2 seconds at 44.1kHz.
-            // (This was originally set to 1024 samples)
-            int bytesRead = 0;
-            byte[] buffer = new byte[88200];
+                // Note for wave files, we can just send data from the file right to the server.
+                // In the case you are not an audio file in wave format, and instead you have just
+                // raw data (for example audio coming over bluetooth), then before sending up any 
+                // audio data, you must first send up an SpeechAudioFormat descriptor to describe 
+                // the layout and format of your raw audio data via DataRecognitionClient's sendAudioFormat() method.
 
-            try
-            {
-                do
-                {
-                    // Get more Audio data to send into byte buffer.
-                    bytesRead = fileStream.Read(buffer, 0, buffer.Length);
+                //this.dataClient.AudioStart();
 
-                    // Send of audio data to service. 
-                    this.dataClient.SendAudio(buffer, bytesRead);
+                // Length of buffer can be changed; currently set to 2 seconds at 16kHz.
+                // (This was originally set to 1024 samples)
+                int bytesRead = 0;
+                byte[] buffer = new byte[32000];
+
+                try {
+                    do {
+                        // Get more Audio data to send into byte buffer.
+                        bytesRead = fileStream.Read(buffer, 0, buffer.Length);
+
+                        // Send of audio data to service. 
+                        this.dataClient.SendAudio(buffer, bytesRead);
+                    }
+                    while (bytesRead > 0);
+                } finally {
+                    // We are done sending audio.  Final recognition results will arrive in OnResponseReceived event call.
+                    this.dataClient.EndAudio();
                 }
-                while (bytesRead > 0);
+
+                this.dataClient.AudioStop();
+
+                fileStream.Close();
+
+                //Wait for the final response event to occur in the OnResponseRecieved event call.
+                oSignalEvent.WaitOne(10000);
+                oSignalEvent.Reset();
+                if (dataClient != null) {
+                    dataClient.Dispose();
+                }
+                //runAgain will tell us whether to run this again or not.
             }
-            finally
-            {
-                // We are done sending audio.  Final recognition results will arrive in OnResponseReceived event call.
-                this.dataClient.EndAudio();
-            }
-
-            this.dataClient.AudioStop();
-
-            fileStream.Close();
-
-            //Wait for the final response event to occur in the OnResponseRecieved event call.
-            oSignalEvent.WaitOne();
-            oSignalEvent.Reset();
 
             return parsedPhrases;
         }
@@ -114,13 +127,17 @@ namespace Script3rSpeech
             // Also copy-and pasted from the sample code.
             if (DEBUG) Console.WriteLine("--- OnDataDictationResponseReceivedHandler ---");
             if (DEBUG) Console.WriteLine(e.PhraseResponse.RecognitionStatus);
-            if (e.PhraseResponse.RecognitionStatus == RecognitionStatus.EndOfDictation || //TODO (neil) Should this be changed?
-                e.PhraseResponse.RecognitionStatus == RecognitionStatus.DictationEndSilenceTimeout)
-            {
-                if (DEBUG) Console.WriteLine("We have final result!");
-                oSignalEvent.Set();
+            lastSpeechStatus = e.PhraseResponse.RecognitionStatus;
 
-                /*Dispatcher.Invoke(
+            switch (e.PhraseResponse.RecognitionStatus) {
+                case RecognitionStatus.EndOfDictation:
+                case RecognitionStatus.DictationEndSilenceTimeout:
+                    if (DEBUG) Console.WriteLine("We have final result!");
+                    Succeeded = true;
+                    runAgain = false;
+                    message = "Succeeded";
+                    oSignalEvent.Set();
+                    /*Dispatcher.Invoke(
                     (Action)(() => {
                         _startButton.IsEnabled = true;
                         _radioGroup.IsEnabled = true;
@@ -129,6 +146,28 @@ namespace Script3rSpeech
                         // for dataReco, since we already called endAudio() on it as soon as we were done
                         // sending all the data.
                     }));*/
+                    break;
+                case RecognitionStatus.Cancelled:
+                    message = "Cancelled by server or client";
+                    Succeeded = false;
+                    runAgain = true;
+                    oSignalEvent.Set();
+                    break;
+                case RecognitionStatus.RecognitionError:
+                    message = "Recognition error (please check file format - ask us for more info)";
+                    Succeeded = false;
+                    runAgain = false;
+                    oSignalEvent.Set();
+                    break;
+                case RecognitionStatus.NoMatch:
+                case RecognitionStatus.InitialSilenceTimeout:
+                case RecognitionStatus.BabbleTimeout:
+                case RecognitionStatus.HotWordMaximumTime:
+                    message = "Too much noise or silence (error: " + e.PhraseResponse.ToString() + ")";
+                    runAgain = false;
+                    Succeeded = false;
+                    //oSignalEvent.Set(); <- why does it keep running after this???
+                    break;
             }
         }
 

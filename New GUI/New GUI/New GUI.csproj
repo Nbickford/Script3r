@@ -123,6 +123,10 @@
     <Content Include="Resources\Logo 48.png" />
     <Content Include="Resources\SCRIPT3R TEXT.png" />
     <None Include="Resources\SCRIPT3R TEXT1.png" />
+	<Content Include="ffmpeg.exe">
+    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
