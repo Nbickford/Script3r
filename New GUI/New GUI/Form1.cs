@@ -167,7 +167,7 @@ namespace New_GUI
         {
             foreach (string path in files_to_move)
             {
-                string exPath = Application.StartupPath;
+                string exPath = Application.StartupPath+"\\";
                 string outPath = exPath + "temporary.wav";
                 int x = 0;
                 while(File.Exists(outPath))
@@ -175,14 +175,17 @@ namespace New_GUI
                     x++;
                     outPath = exPath + "temporary" + x + ".wav";
                 }
-
-                string cmdText = "/c ffmpeg -ss 0 -t 30 -i " + path + " " + outPath;
-                Process.Start("CMD.exe", cmdText);
+                
+                string cmdText = "/c ffmpeg -i " + "\""+path +"\""+ " " + "\""+outPath+"\"";
+                string pee = cmdText;
+                Process pro = Process.Start("CMD.exe", cmdText);
+                pro.WaitForExit();
                 string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
                 if(File.Exists(outPath))
                 {
                     File.Delete(outPath);
                 }
+                
 
                 textBox2.Text += transcribed + "\r\n\r\n";
 
