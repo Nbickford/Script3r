@@ -312,6 +312,8 @@ namespace New_GUI
             push = true;                              
             SaveOutputDirectoryName(DestinationBox.Text);
             backgroundWorker1.RunWorkerAsync();
+
+            
         }
 
         // Main processing stage, run from the backgroundWorker.
@@ -385,7 +387,8 @@ namespace New_GUI
             clear.Enabled = true;
             clear_selected.Enabled = true;
             push = false;
-
+            files_to_move.Clear();
+            source_file_dict.Clear();
             try {
                 // Open the output Windows Explorer directory, showing all of the files in their properly sorted order.
                 Process p = new Process();
@@ -399,7 +402,7 @@ namespace New_GUI
 
             //TODO: Re-enable checkboxes and text fields so that we can add more files and keep on going,
             // or close the application.
-            CloseApplication();
+            //CloseApplication();
         }
 
         private void textBox2_Click(object sender, EventArgs e)
@@ -519,7 +522,10 @@ namespace New_GUI
             foreach (ListViewItem v in InputBox.SelectedItems)
             {
                 InputBox.Items.Remove(v);
-                files_to_move.RemoveAt(files_to_move.IndexOf(v.SubItems[0].Text));
+                if (files_to_move.IndexOf(v.SubItems[0].Text) != -1)
+                {
+                    files_to_move.RemoveAt(files_to_move.IndexOf(v.SubItems[0].Text));
+                }
             }
         }
 
