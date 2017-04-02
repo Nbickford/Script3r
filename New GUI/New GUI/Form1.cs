@@ -274,6 +274,7 @@ namespace New_GUI
             FillMissingInformation();
 
             file_move.move_and_org(files_to_move, source_file_dict, destination);
+            Environment.Exit(0);
         }
 
         private void textBox2_Click(object sender, EventArgs e)
