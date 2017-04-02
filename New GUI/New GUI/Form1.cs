@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Script3rLibrary;
+using Script3rSpeech;
 
 namespace New_GUI
 {
@@ -18,6 +19,7 @@ namespace New_GUI
         private List<string> files_to_move;
         private Dictionary<string, List<string>> source_file_dict;
         private string destination;
+        private SpeechRecognizer recognizer;
 
         public Form1()
         {
@@ -29,6 +31,7 @@ namespace New_GUI
             this.files_to_move = new List<string> { };
             this.source_file_dict = new Dictionary<string, List<string>> { };
             this.destination = "";
+            this.recognizer = new SpeechRecognizer();
         }
 
         void textBox_DragEnter(object sender, DragEventArgs e)
@@ -51,6 +54,11 @@ namespace New_GUI
                     // This path is a directory
                     ProcessDirectory(path);
                 }
+
+                string transcribed = String.Join(" ",this.recognizer.RecognizeSpeech(path));
+                
+                source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
+
             }
         }
 
@@ -85,6 +93,7 @@ namespace New_GUI
         {
             textBox2.Text = "";
             files_to_move.Clear();
+            source_file_dict.Clear();
         }
 
         private void button1_Click_1(object sender, EventArgs e)
