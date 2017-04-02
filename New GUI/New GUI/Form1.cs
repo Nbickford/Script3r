@@ -131,7 +131,9 @@ namespace New_GUI
         // Insert logic for processing found files here.
         void ProcessFile(string path)
         {
-            InputBox.Text += path + "\r\n";
+            //InputBox2.Text += path + "\r\n";
+            var item = new ListViewItem(new[] { path });
+            this.InputBox.Items.Add(item);
             files_to_move.Add(path);
         }
         
@@ -146,7 +148,8 @@ namespace New_GUI
             if (confirmResult == DialogResult.Yes)
             {
                 // If 'Yes', do something here.
-                InputBox.Text = "";
+                InputBox.Clear();
+                InputBox.Columns.Add("File Name", -2, HorizontalAlignment.Left);
                 files_to_move.Clear();
                 source_file_dict.Clear();
             }
@@ -507,6 +510,20 @@ namespace New_GUI
         private void LeftPanel_MouseUp(object sender, MouseEventArgs e)
         {
             TogMove = 0;
+        }
+
+        private void InputBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void clear_selected_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem v in InputBox.SelectedItems)
+            {
+                InputBox.Items.Remove(v);
+                files_to_move.RemoveAt(files_to_move.IndexOf(v.SubItems[0].Text));
+            }
         }
 
         private void label1_Click_1(object sender, EventArgs e)
