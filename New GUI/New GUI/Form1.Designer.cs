@@ -153,7 +153,7 @@
             // Script3rTitle
             // 
             this.Script3rTitle.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.Script3rTitle.Image = global::New_GUI.Properties.Resources.SCRIPT3R_TEXT;
+            this.Script3rTitle.Image = global::New_GUI.Properties.Resources.eDIT;
             this.Script3rTitle.Location = new System.Drawing.Point(76, 0);
             this.Script3rTitle.Name = "Script3rTitle";
             this.Script3rTitle.Size = new System.Drawing.Size(379, 75);
