@@ -194,5 +194,18 @@ namespace New_GUI
 
             file_move.move_and_org(files_to_move, source_file_dict, destination);
         }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog x = new OpenFileDialog();
+            x.Multiselect = true;
+            x.ShowDialog();
+            string[] result = x.FileNames;
+
+            foreach (String file in result)
+            {
+                ProcessFile(file);
+            }
+        }
     }
 }
