@@ -62,6 +62,7 @@ namespace New_GUI
         {
             if (push) return;
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop);
+            filesAdded = 0;
             foreach (string path in paths)
             {
                 if (File.Exists(path))
@@ -74,6 +75,9 @@ namespace New_GUI
                     // This path is a directory
                     ProcessDirectory(path);
                 }
+            }
+            if (filesAdded == 0) {
+                MessageBox.Show("Unfortunately, none of the files you dragged and dropped were .mov or .wav files!");
             }
         }
 
@@ -108,6 +112,8 @@ namespace New_GUI
             }
         }
 
+        int filesAdded = 0;
+
         // Process all files in the directory passed in, recurse on any directories
         // that are found, and process the files they contain.
         void ProcessDirectory(string targetDirectory)
@@ -126,10 +132,21 @@ namespace New_GUI
         // Insert logic for processing found files here.
         void ProcessFile(string path)
         {
+            // Check path ending.
+            int dot = path.LastIndexOf('.');
+            if (dot == -1) return;
+            string extension = path.Substring(dot+1).ToLower();
+            string[] supportedExtensions = {
+                "wav","mov"
+            };
+            //TODO (neil): Fill this out
+            if (Array.IndexOf(supportedExtensions, extension) == -1) return;
+            
             //InputBox2.Text += path + "\r\n";
             var item = new ListViewItem(new[] { path });
             this.InputBox.Items.Add(item);
             files_to_move.Add(path);
+            filesAdded++;
         }
         
         private void clear_Click_1(object sender, EventArgs e)

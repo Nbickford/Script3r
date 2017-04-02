@@ -7,7 +7,7 @@
     <ProjectGuid>{96F9E2E6-F515-4870-B088-5E60DFAAE03A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>New_GUI</RootNamespace>
-    <AssemblyName>New GUI</AssemblyName>
+    <AssemblyName>eDIT</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
