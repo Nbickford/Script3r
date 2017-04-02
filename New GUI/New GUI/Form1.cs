@@ -139,7 +139,7 @@ namespace New_GUI
             button1.Enabled = false;
             button2.Enabled = false;
             clear.Enabled = false;
-            var confirmResult = MessageBox.Show("Are you sure you want to clear you selections?",
+            var confirmResult = MessageBox.Show("Are you sure you want to clear your selection?",
                                      "Confirm Clear!",
                                      MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
@@ -312,10 +312,6 @@ namespace New_GUI
             push = true;                              
             SaveOutputDirectoryName(DestinationBox.Text);
             backgroundWorker1.RunWorkerAsync();
-        
-            button2.Enabled = true;
-            button1.Enabled = true;
-            clear.Enabled = true;
         }
 
         // Main processing stage, run from the backgroundWorker.
@@ -382,11 +378,23 @@ namespace New_GUI
                     "Here it is, for the developers: \n" +
                     e.Error.ToString());
             }
-            // Open the output Windows Explorer directory, showing all of the files in their properly sorted order.
-            Process p = new Process();
-            p.StartInfo.FileName = "explorer.exe";
-            p.StartInfo.Arguments = "file:\\\\" + destination;
-            p.Start();
+
+            // Re-enable buttons
+            button2.Enabled = true;
+            button1.Enabled = true;
+            clear.Enabled = true;
+            push = false;
+
+            try {
+                // Open the output Windows Explorer directory, showing all of the files in their properly sorted order.
+                Process p = new Process();
+                p.StartInfo.FileName = "explorer.exe";
+                p.StartInfo.Arguments = "file:\\\\" + destination;
+                p.Start();
+            }catch(Exception ex) {
+                MessageBox.Show("Tried to open explorer.exe at " + destination + ", but was unable to.\n" +
+                    "Here's the full error (for developers): " + ex.ToString());
+            }
 
             //TODO: Re-enable checkboxes and text fields so that we can add more files and keep on going,
             // or close the application.
@@ -395,14 +403,15 @@ namespace New_GUI
 
         private void textBox2_Click(object sender, EventArgs e)
         {
-            OpenFileDialog x = new OpenFileDialog();
-            x.Multiselect = true;
-            x.ShowDialog();
-            string[] result = x.FileNames;
+            if (!push) { // don't handle this if currently processing
+                OpenFileDialog x = new OpenFileDialog();
+                x.Multiselect = true;
+                x.ShowDialog();
+                string[] result = x.FileNames;
 
-            foreach (String file in result)
-            {
-                ProcessFile(file);
+                foreach (String file in result) {
+                    ProcessFile(file);
+                }
             }
         }
 
