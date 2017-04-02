@@ -11,29 +11,46 @@ using System.IO;
 using System.Diagnostics;
 using Script3rLibrary;
 using Script3rSpeech;
+using System.Runtime.InteropServices;
+
+
 
 namespace New_GUI
 {
-    public partial class Form1 : Form
+    public partial class MainPage : Form
     {
         private FolderBrowserDialog fbd;
         private List<string> files_to_move;
         private Dictionary<string, string[]> source_file_dict;
         private string destination;
         private SpeechRecognizer recognizer;
+        int TogMove, MValX, MValY;
 
-        public Form1()
+        public MainPage()
         {
             InitializeComponent();
             this.AllowDrop = true;
-            textBox2.DragEnter += new DragEventHandler(textBox_DragEnter);
-            textBox2.DragDrop += new DragEventHandler(textBox_DragDrop);
+            InputBox.DragEnter += new DragEventHandler(textBox_DragEnter);
+            InputBox.DragDrop += new DragEventHandler(textBox_DragDrop);
             this.fbd = new FolderBrowserDialog();
             this.files_to_move = new List<string> { };
             this.source_file_dict = new Dictionary<string, string[]> { };
             this.destination = "";
             this.recognizer = new SpeechRecognizer();
         }
+
+
+
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            if (m.Msg == WM_NCHITTEST)
+                m.Result = (IntPtr)(HT_CAPTION);
+        }
+
+        private const int WM_NCHITTEST = 0x84;
+        private const int HT_CLIENT = 0x1;
+        private const int HT_CAPTION = 0x2;
 
         void textBox_DragEnter(object sender, DragEventArgs e)
         {
@@ -81,13 +98,13 @@ namespace New_GUI
         // Insert logic for processing found files here.
         void ProcessFile(string path)
         {
-            textBox2.Text += path + "\r\n";
+            InputBox.Text += path + "\r\n";
             files_to_move.Add(path);
         }
         
         private void clear_Click_1(object sender, EventArgs e)
         {
-            textBox2.Text = "";
+            InputBox.Text = "";
             files_to_move.Clear();
             source_file_dict.Clear();
         }
@@ -97,7 +114,7 @@ namespace New_GUI
             DialogResult result = fbd.ShowDialog();
             if (result == DialogResult.OK)
             {
-                textBox1.Text = fbd.SelectedPath;
+                DestinationBox.Text = fbd.SelectedPath;
                 this.destination = fbd.SelectedPath;
             }
         }
@@ -255,17 +272,17 @@ namespace New_GUI
                 pro.WaitForExit();
 
                 string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
-                
 
                 if (File.Exists(outPath)) {
                     File.Delete(outPath);
                 }               
 
+
                 //DEBUG (neil, Vincent): Print out recognition result info to textbox.
-                textBox2.Text += recognizer.message + "\r\n";
-                textBox2.Text += recognizer.lastSpeechStatus + "\r\n";
-                textBox2.Text += "Succeeded: " + recognizer.Succeeded;
-                textBox2.Text += transcribed + "\r\n\r\n";
+                InputBox.Text += recognizer.message + "\r\n";
+                InputBox.Text += recognizer.lastSpeechStatus + "\r\n";
+                InputBox.Text += "Succeeded: " + recognizer.Succeeded;
+                InputBox.Text += transcribed + "\r\n\r\n";
 
                 source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
             }
@@ -288,6 +305,110 @@ namespace New_GUI
             {
                 ProcessFile(file);
             }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InputBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DestinationBox_Click(object sender, EventArgs e)
+        {
+            DialogResult result = fbd.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                DestinationBox.Text = fbd.SelectedPath;
+                this.destination = fbd.SelectedPath;
+            }
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+            Application.Exit();
+        }
+
+        private void MinimizeWindow_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void TopPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            MValX = e.X; MValY = e.Y; TogMove = 1;
+        }
+
+        private void TopPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (TogMove == 1) {
+                this.SetDesktopLocation(MousePosition.X - MValX, MousePosition.Y - MValY);
+            }
+        }
+
+        private void TopPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            TogMove = 0;
+        }
+
+        private void Script3rTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            MValX = e.X; MValY = e.Y; TogMove = 1;
+        }
+
+        private void Script3rTitle_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (TogMove == 1)
+            {
+                this.SetDesktopLocation(MousePosition.X - MValX - 74, MousePosition.Y - MValY);
+            }
+        }
+
+        private void Script3rTitle_MouseUp(object sender, MouseEventArgs e)
+        {
+            TogMove = 0;
+        }
+
+        private void LeftPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            MValX = e.X; MValY = e.Y; TogMove = 1;
+        }
+
+        private void LeftPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (TogMove == 1)
+            {
+                this.SetDesktopLocation(MousePosition.X - MValX, MousePosition.Y - MValY -74);
+            }
+        }
+
+        private void LeftPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            TogMove = 0;
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainPage_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
