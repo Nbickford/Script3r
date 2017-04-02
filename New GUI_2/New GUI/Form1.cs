@@ -114,5 +114,10 @@ namespace New_GUI
 
             file_move.move_and_org(files_to_move, source_file_dict, destination);
         }
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

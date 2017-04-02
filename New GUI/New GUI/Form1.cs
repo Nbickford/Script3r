@@ -239,7 +239,9 @@ namespace New_GUI
         {
             foreach (string path in files_to_move)
             {
+
                 string exPath = Application.StartupPath + "\\";
+
                 string outPath = exPath + "temporary.wav";
                 int x = 0;
                 while (File.Exists(outPath)) {
@@ -257,7 +259,7 @@ namespace New_GUI
 
                 if (File.Exists(outPath)) {
                     File.Delete(outPath);
-                }
+                }               
 
                 //DEBUG (neil, Vincent): Print out recognition result info to textbox.
                 textBox2.Text += recognizer.message + "\r\n";
@@ -272,6 +274,19 @@ namespace New_GUI
             FillMissingInformation();
 
             file_move.move_and_org(files_to_move, source_file_dict, destination);
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog x = new OpenFileDialog();
+            x.Multiselect = true;
+            x.ShowDialog();
+            string[] result = x.FileNames;
+
+            foreach (String file in result)
+            {
+                ProcessFile(file);
+            }
         }
     }
 }
