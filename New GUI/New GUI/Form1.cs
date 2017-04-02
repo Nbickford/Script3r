@@ -55,11 +55,12 @@ namespace New_GUI
 
         void textBox_DragEnter(object sender, DragEventArgs e)
         {
-            if (push) return;
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && !push) e.Effect = DragDropEffects.Copy;
         }
 
         void textBox_DragDrop(object sender, DragEventArgs e)
         {
+            if (push) return;
             string[] paths = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string path in paths)
             {
