@@ -294,4 +294,3 @@
         private System.Windows.Forms.Button clear_selected;
     }
 }
-

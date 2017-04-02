@@ -77,11 +77,6 @@ namespace New_GUI
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void MainPage_Load(object sender, EventArgs e) {
             // Load in the previous output directory from settings.txt (if it exists)
             string directoryName = LoadOutputDirectoryName();
@@ -312,7 +307,8 @@ namespace New_GUI
             button2.Enabled = false;
             button1.Enabled = false;
             clear.Enabled = false;
-            
+            clear_selected.Enabled = false;
+
             push = true;                              
             SaveOutputDirectoryName(DestinationBox.Text);
             backgroundWorker1.RunWorkerAsync();
@@ -387,6 +383,7 @@ namespace New_GUI
             button2.Enabled = true;
             button1.Enabled = true;
             clear.Enabled = true;
+            clear_selected.Enabled = true;
             push = false;
 
             try {
