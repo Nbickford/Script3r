@@ -44,4 +44,4 @@ Finally, we rename the file and move it to a properly categorized output directo
 
 ## Credits
 
-e.Dit is a project by Vincent Vole, Neil Bickford, Mason Fordham, and Michael Evangelista for LA Hacks 2017! They're pretty proud of it.
+e.DIT is a project by Vincent Vole, Neil Bickford, Mason Fordham, and Michael Evangelista for LA Hacks 2017! They're pretty proud of it.
