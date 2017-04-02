@@ -176,7 +176,7 @@ namespace New_GUI
                     outPath = exPath + "temporary" + x + ".wav";
                 }
                 
-                string cmdText = "/c ffmpeg -i " + "\""+path +"\""+ " " + "\""+outPath+"\"";
+                string cmdText = "/c ffmpeg -ss 0 -i " + "\""+path +"\""+ " -t 30 -acodec pcm_s16le -ac 1 -ar 16000 " + "\""+outPath+"\"";
                 string pee = cmdText;
                 Process pro = Process.Start("CMD.exe", cmdText);
                 pro.WaitForExit();
@@ -184,8 +184,7 @@ namespace New_GUI
                 if(File.Exists(outPath))
                 {
                     File.Delete(outPath);
-                }
-                
+                }               
 
                 textBox2.Text += transcribed + "\r\n\r\n";
 
