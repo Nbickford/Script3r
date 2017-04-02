@@ -85,6 +85,7 @@ namespace New_GUI
             // Load in the previous output directory from settings.txt (if it exists)
             string directoryName = LoadOutputDirectoryName();
             DestinationBox.Text = directoryName;
+            this.destination = directoryName;
         }
 
         private string LoadOutputDirectoryName() {
