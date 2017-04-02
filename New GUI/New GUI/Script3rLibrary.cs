@@ -107,18 +107,33 @@ namespace Script3rLibrary {
             //Positiont starts at a letter; find the next word, and see if it's a number word. 
             //expands to the next word and checks iteratively
             int nextSpace = transcript.IndexOf(' ', positiont);
-            if (nextSpace != -1)
+            if (nextSpace == -1)
+            {
+                takeNum = transcript.Substring(positiont, transcript.Length - positiont);
+            }
+            else
             {
                 takeNum = transcript.Substring(positiont, nextSpace - positiont);
-                while (IsNum(takeNum))
+            }
+            while (IsNum(takeNum))
+            {
+
+                fileData[2] = ParseEnglish(takeNum).ToString();
+                if (nextSpace == -1)
+                    break;
+
+                nextSpace = transcript.IndexOf(' ', nextSpace + 1);
+
+                if (nextSpace == -1)
                 {
-                    fileData[2] = ParseEnglish(takeNum).ToString();
-                    nextSpace = transcript.IndexOf(' ', nextSpace + 1);
-                    if (nextSpace == -1)
-                        break;
-                    takeNum = transcript.Substring(transcript.IndexOf(takeNum), nextSpace - transcript.IndexOf(takeNum));
+                    takeNum = transcript.Substring(positiont, transcript.Length - positiont);
+                }
+                else
+                {
+                    takeNum = transcript.Substring(positiont, nextSpace - positiont);
                 }
             }
+
 
             //# increment backwards to get the next term for sceneword
             //If we're at the beginning... well, we can't really go back.
@@ -136,7 +151,7 @@ namespace Script3rLibrary {
                 fileData[1] = sceneWord[0].ToString(); // get the first letter
                 if (prevSpace <= -1)
                     break;
-                prevSpace = transcript.LastIndexOf(' ', prevSpace - 1);                
+                prevSpace = transcript.LastIndexOf(' ', prevSpace - 1);
                 sceneWord = transcript.Substring(prevSpace + 1, transcript.IndexOf(sceneWord) - prevSpace - 1);
             }
 
@@ -148,15 +163,19 @@ namespace Script3rLibrary {
                 while (IsNum(sceneNum))
                 {
                     fileData[0] = ParseEnglish(sceneNum).ToString();
-                    prevSpace = transcript.LastIndexOf(' ', prevSpace - 1);
-                    if (prevSpace < -1)
+                    if (prevSpace < 0)
                         break;
+                    prevSpace = transcript.LastIndexOf(' ', prevSpace - 1);
+
                     sceneNum = transcript.Substring(prevSpace + 1, sceneNum.Length + transcript.IndexOf(sceneNum) - prevSpace - 1);
                 }
             }
 
             //# increment backwards to get scene number
             return fileData;
+
+
+
         }
     }
 
