@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 using Script3rLibrary;
 using Script3rSpeech;
 
@@ -166,9 +167,24 @@ namespace New_GUI
         {
             foreach (string path in files_to_move)
             {
-                string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(path));
+                string exPath = Application.StartupPath;
+                string outPath = exPath + "temporary.wav";
+                int x = 0;
+                while(File.Exists(outPath))
+                {
+                    x++;
+                    outPath = exPath + "temporary" + x + ".wav";
+                }
 
-                textBox2.Text += transcribed;
+                string cmdText = "/c ffmpeg -ss 0 -t 30 -i " + path + " " + outPath;
+                Process.Start("CMD.exe", cmdText);
+                string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
+                if(File.Exists(outPath))
+                {
+                    File.Delete(outPath);
+                }
+
+                textBox2.Text += transcribed + "\r\n\r\n";
 
                 source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
             }
