@@ -118,7 +118,7 @@ namespace New_GUI
                     outPath = exPath + "temporary" + x + ".wav";
                 }
 
-                string cmdText = "/c ffmpeg -i " + path + " " + outPath;
+                string cmdText = "/c ffmpeg -ss 0 -t 30 -i " + path + " " + outPath;
                 Process.Start("CMD.exe", cmdText);
                 string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
                 if(File.Exists(outPath))
