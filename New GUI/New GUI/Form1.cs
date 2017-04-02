@@ -101,7 +101,65 @@ namespace New_GUI
             }
         }
 
+        // ASSUMES: x and y are not both empty.
+        private static int SortByFirstElement(string[] x, string[] y) {
+            return x[0].CompareTo(y[0]);
+        }
+
         private void FillMissingInformation() {
+            if (source_file_dict.Count == 0) return;
+            // Attempt to fill in any incomplete information on files.
+            // We can assume a few things, within any directory of videos:
+            // (1) Videos with contiguous names were shot contiguously,
+            // and sorting them like 1, 2, 3... will place them in the order
+            // they were shot.
+            // (2) The 2nd AC does not skip takes.
+            // So, we can fill in the following information (for a file C in between
+            // files A and B)
+            // - If A and B have the same scene number, C's scene number will be the
+            // same as those.
+            // - If A and B have the same subscene number, C's scene number will be the
+            // same as those.
+            // - If A and B are n shots apart and their take numbers differ by n and their scenes match, then
+            //   each shot in between A and B contains exactly one take.
+
+            // So, we need to (1) have logic to process each directory of videos individually,
+            // and (2) sort and fill in the missing information for the videos in order for each directory.
+            // The "if their scenes match" bit means we might have to process previous files multiple times -
+            // but realistically, we can assume the number of files is small.
+
+            // By default, we start at scene 1A, take 0, so that incomplete files at the start match up.
+            // First, let's create a temporary structure consisting of a list of all of the files.
+            // We'll then iterate through it using a stack.
+
+            List<string[]> fileList = new List<string[]>();
+            foreach (KeyValuePair<string, string[]> kvp in source_file_dict) {
+                if (kvp.Value.Length != 3) {
+                    throw new Exception("Development team error: Length of labels must be 3.");
+                }
+                fileList.Add(new String[4] {
+                    kvp.Key,kvp.Value[0],kvp.Value[1],kvp.Value[2]
+                });
+            }
+
+            fileList.Sort(SortByFirstElement);
+
+            //state machine, whee!
+            string currentDirectory = Path.GetDirectoryName(fileList[0][0]);
+            int prevScene = 1;
+            string prevLetter = "A";
+            int prevTake = 0;
+
+            for(int i=0; i < fileList.Count; i++) {
+                // Have we switched to a new directory?
+                string fileDirectory = Path.GetDirectoryName(fileList[i][0]);
+                if (fileDirectory != currentDirectory) {
+                    prevScene = 1;
+                    prevLetter = "A";
+                    prevTake = 0;
+                }
+            }
+            //TODO (neil): Finish this
         }
 
         private void button2_Click_1(object sender, EventArgs e)
