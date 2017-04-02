@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,6 +24,7 @@ namespace New_GUI
         private Dictionary<string, string[]> source_file_dict;
         private string destination;
         private SpeechRecognizer recognizer;
+        private bool push = false;
         int TogMove, MValX, MValY;
 
         public MainPage()
@@ -290,47 +291,52 @@ namespace New_GUI
         }
 
         private void button2_Click_1(object sender, EventArgs e)
-        {
-            SaveOutputDirectoryName(DestinationBox.Text);
-
-            foreach (string path in files_to_move)
+        {if (push == false)
             {
+                push = true;
+                SaveOutputDirectoryName(DestinationBox.Text);
 
-                string exPath = Application.StartupPath + "\\";
+                foreach (string path in files_to_move)
+                {
 
-                string outPath = exPath + "temporary.wav";
-                int x = 0;
-                while (File.Exists(outPath)) {
-                    x++;
-                    outPath = exPath + "temporary" + x + ".wav";
+                    string exPath = Application.StartupPath + "\\";
+
+                    string outPath = exPath + "temporary.wav";
+                    int x = 0;
+                    while (File.Exists(outPath))
+                    {
+                        x++;
+                        outPath = exPath + "temporary" + x + ".wav";
+                    }
+
+                    string cmdText = "/c ffmpeg -ss 0 -i " + "\"" + path + "\"" + " -t 30 -acodec pcm_s16le -ac 1 -ar 16000 " + "\"" + outPath + "\"";
+                    string pee = cmdText;
+                    Process pro = Process.Start("CMD.exe", cmdText);
+                    pro.WaitForExit();
+
+                    string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
+
+                    if (File.Exists(outPath))
+                    {
+                        File.Delete(outPath);
+                    }
+
+
+                    //DEBUG (neil, Vincent): Print out recognition result info to textbox.
+                    InputBox.Text += recognizer.message + "\r\n";
+                    InputBox.Text += recognizer.lastSpeechStatus + "\r\n";
+                    InputBox.Text += "Succeeded: " + recognizer.Succeeded;
+                    InputBox.Text += transcribed + "\r\n\r\n";
+
+                    source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
                 }
 
-                string cmdText = "/c ffmpeg -ss 0 -i " + "\"" + path + "\"" + " -t 30 -acodec pcm_s16le -ac 1 -ar 16000 " + "\"" + outPath + "\"";
-                string pee = cmdText;
-                Process pro = Process.Start("CMD.exe", cmdText);
-                pro.WaitForExit();
+                //TODO (neil): Export files as soon as we have all three parts of their information.
+                FillMissingInformation();
 
-                string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
-
-                if (File.Exists(outPath)) {
-                    File.Delete(outPath);
-                }               
-
-
-                //DEBUG (neil, Vincent): Print out recognition result info to textbox.
-                InputBox.Text += recognizer.message + "\r\n";
-                InputBox.Text += recognizer.lastSpeechStatus + "\r\n";
-                InputBox.Text += "Succeeded: " + recognizer.Succeeded;
-                InputBox.Text += transcribed + "\r\n\r\n";
-
-                source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
+                file_move.move_and_org(files_to_move, source_file_dict, destination);
+                CloseApplication();
             }
-
-            //TODO (neil): Export files as soon as we have all three parts of their information.
-            FillMissingInformation();
-
-            file_move.move_and_org(files_to_move, source_file_dict, destination);
-            CloseApplication();
         }
 
         private void textBox2_Click(object sender, EventArgs e)
