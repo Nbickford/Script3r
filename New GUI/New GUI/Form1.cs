@@ -280,10 +280,10 @@ namespace New_GUI
 
 
                 //DEBUG (neil, Vincent): Print out recognition result info to textbox.
-                textBox2.Text += recognizer.message + "\r\n";
-                textBox2.Text += recognizer.lastSpeechStatus + "\r\n";
-                textBox2.Text += "Succeeded: " + recognizer.Succeeded;
-                textBox2.Text += transcribed + "\r\n\r\n";
+                InputBox.Text += recognizer.message + "\r\n";
+                InputBox.Text += recognizer.lastSpeechStatus + "\r\n";
+                InputBox.Text += "Succeeded: " + recognizer.Succeeded;
+                InputBox.Text += transcribed + "\r\n\r\n";
 
                 source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
             }
