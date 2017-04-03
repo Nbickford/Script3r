@@ -18,6 +18,9 @@ namespace Script3rSpeech
         private string authenticationUri = ""; // according to the sample app, this is optional
         private bool DEBUG = false; // For printing out debug information
 
+        private string parentKeyName = "";
+        private New_GUI.MainPage m_parent;
+
         // Manual reset event for making the speech call synchronous
         ManualResetEvent oSignalEvent;
 
@@ -56,13 +59,16 @@ namespace Script3rSpeech
             }
         }
 
-        public List<string> RecognizeSpeech(string inputFile)
+        public List<string> RecognizeSpeech(string inputFile, string videoFile, New_GUI.MainPage parent)
         {
             //TODO (neil): Input file verification
             parsedPhrases = new List<string>();
             Succeeded = false;
             runAgain = true;
+            parentKeyName = videoFile;
+            m_parent = parent;
             message = "Running...";
+            parent.UpdateItemStatus(parentKeyName, message);
 
             for (int numTries = 3; numTries > 0 && runAgain; numTries--) {
                 /*this.dataClient = SpeechRecognitionServiceFactory.CreateDataClient(
@@ -98,7 +104,8 @@ namespace Script3rSpeech
                 // (This was originally set to 1024 samples)
                 int bytesRead = 0;
                 byte[] buffer = new byte[32000];
-
+                int bytesSent = 0;
+                parent.UpdateItemStatus(parentKeyName, "Uploading audio file...");
                 try {
                     do {
                         // Get more Audio data to send into byte buffer.
@@ -106,6 +113,8 @@ namespace Script3rSpeech
 
                         // Send of audio data to service. 
                         this.dataClient.SendAudio(buffer, bytesRead);
+                        bytesSent += bytesRead;
+                        parent.UpdateItemStatus(parentKeyName, "Uploading audio file... "+(bytesRead/1000).ToString()+" kB sent.");
                     }
                     while (bytesRead > 0);
                 } finally {
@@ -117,8 +126,10 @@ namespace Script3rSpeech
 
                 fileStream.Close();
 
+                parent.UpdateItemStatus(parentKeyName, "Waiting for audio transcription from server...");
+
                 //Wait for the final response event to occur in the OnResponseRecieved event call.
-                oSignalEvent.WaitOne(10000);
+                oSignalEvent.WaitOne(5000);
                 oSignalEvent.Reset();
                 if (dataClient != null) {
                     dataClient.Dispose();
@@ -151,6 +162,7 @@ namespace Script3rSpeech
                     Succeeded = true;
                     runAgain = false;
                     message = "Succeeded";
+                    m_parent.UpdateItemStatus(parentKeyName, message);
                     oSignalEvent.Set();
                     /*Dispatcher.Invoke(
                     (Action)(() => {
@@ -164,12 +176,14 @@ namespace Script3rSpeech
                     break;
                 case RecognitionStatus.Cancelled:
                     message = "Cancelled by server or client";
+                    m_parent.UpdateItemStatus(parentKeyName, message);
                     Succeeded = false;
                     runAgain = true;
                     oSignalEvent.Set();
                     break;
                 case RecognitionStatus.RecognitionError:
                     message = "Recognition error (please check file format - ask us for more info)";
+                    m_parent.UpdateItemStatus(parentKeyName, message);
                     Succeeded = false;
                     runAgain = false;
                     oSignalEvent.Set();
@@ -178,13 +192,15 @@ namespace Script3rSpeech
                 case RecognitionStatus.InitialSilenceTimeout:
                 case RecognitionStatus.BabbleTimeout:
                 case RecognitionStatus.HotWordMaximumTime:
-                    message = "Too much noise or silence (error: " + e.PhraseResponse.ToString() + ")";
+                    message = "Too much noise or silence (error: " + e.PhraseResponse.RecognitionStatus.ToString() + ")";
+                    m_parent.UpdateItemStatus(parentKeyName, message);
                     runAgain = false;
                     Succeeded = false;
                     //oSignalEvent.Set(); <- why does it keep running after this???
                     break;
                 default:
-                    message = "Unknown message type: "+e.PhraseResponse.ToString();
+                    message = "Unknown response code: "+e.PhraseResponse.RecognitionStatus.ToString();
+                    m_parent.UpdateItemStatus(parentKeyName, message);
                     break;
             }
         }

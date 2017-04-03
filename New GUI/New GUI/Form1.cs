@@ -143,7 +143,7 @@ namespace New_GUI
             if (Array.IndexOf(supportedExtensions, extension) == -1) return;
             
             //InputBox2.Text += path + "\r\n";
-            var item = new ListViewItem(new[] { path });
+            var item = new ListViewItem(new[] { path, "" });
             this.InputBox.Items.Add(item);
             files_to_move.Add(path);
             filesAdded++;
@@ -162,6 +162,7 @@ namespace New_GUI
                 // If 'Yes', do something here.
                 InputBox.Clear();
                 InputBox.Columns.Add("File Name", -2, HorizontalAlignment.Left);
+                InputBox.Columns.Add("Status", -2, HorizontalAlignment.Left); //TODO(neil): Check this
                 files_to_move.Clear();
                 source_file_dict.Clear();
             }
@@ -308,7 +309,6 @@ namespace New_GUI
                     expectedTake++;
                 }
             }
-            //TODO (neil): Finish this?
 
             //Cool. Fill in the additional information in the dictionary.
             for (int i = 0; i < fileList.Count; i++) {
@@ -336,7 +336,7 @@ namespace New_GUI
         // Main processing stage, run from the backgroundWorker.
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e) {
             foreach (string path in files_to_move) {
-
+                UpdateItemStatus(path, "Generating audio...");
                 string exPath = Application.StartupPath + "\\";
 
                 string outPath = exPath + "temporary.wav";
@@ -350,27 +350,28 @@ namespace New_GUI
                 string pee = cmdText;
                 Process pro = Process.Start("CMD.exe", cmdText);
                 pro.WaitForExit();
+                UpdateItemStatus(path, "Initializing speech engine.");
 
-                string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath));
+                string transcribed = String.Join(" ", this.recognizer.RecognizeSpeech(outPath, path, this))+" ";
+
+                UpdateItemStatus(path, "Parsed transcript; Removing temporary audio file.");
 
                 if (File.Exists(outPath)) {
                     File.Delete(outPath);
                 }
 
-
-                //DEBUG (neil, Vincent): Print out recognition result info to textbox.
-                AppendTextAsync(recognizer.message + "\r\n");
-                AppendTextAsync(recognizer.lastSpeechStatus + "\r\n");
-                AppendTextAsync("Succeeded: " + recognizer.Succeeded + "\r\n");
-                AppendTextAsync(transcribed + "\r\n\r\n");
+                UpdateItemStatus(path, "Parsing transcript: "+transcribed);
 
                 source_file_dict.Add(path, text_to_take.SearchStr(transcribed));
+
+                UpdateItemStatus(path, "Ready to move: Scene " + source_file_dict[path][0] + source_file_dict[path][1]+
+                    " take " + source_file_dict[path][2]);
             }
 
             //TODO (neil): Export files as soon as we have all three parts of their information.
-            //TODO: Print progress information.
             FillMissingInformation();
 
+            // This has just been changed to possibly append numbers to the end - please check it.
             file_move.move_and_org(files_to_move, source_file_dict, destination);
         }
 
@@ -390,12 +391,32 @@ namespace New_GUI
             }
         }
 
+        delegate void TwoStringArgReturningVoidDelegate(string originalFilename, string text);
+
+        public void UpdateItemStatus(string originalFilename, string text) {
+            if (this.InputBox.InvokeRequired) {
+                TwoStringArgReturningVoidDelegate d = new TwoStringArgReturningVoidDelegate(UpdateItemStatus);
+                this.Invoke(d, new object[] { originalFilename, text });
+            } else {
+                int foundIndex = -1;
+                for(int i = 0; i < InputBox.Items.Count; i++) {
+                    if (this.InputBox.Items[i].SubItems[0].Text.Equals(originalFilename)) {
+                        foundIndex = i;
+                    }
+                }
+                if (foundIndex == -1) return;
+                this.InputBox.Items[foundIndex].SubItems[1].Text = text;
+            }
+        
+        }
+
         // Callback to the main form.
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
             if (e.Error != null) {
                 MessageBox.Show("The background thread ran into an error!\n" +
                     "Here it is, for the developers: \n" +
                     e.Error.ToString());
+                return;
             }
 
             // Re-enable buttons
