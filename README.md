@@ -10,7 +10,7 @@ For more information, check out our devpost at https://devpost.com/software/scri
 
 Here's how to get started categorizing your footage with e.DIT:
 
-1. Download the latest release (------) from the Releases tab of this GitHub repository and extract it to a local folder. 
+1. Download the latest release (v0.42-beta.1) from the Releases tab of this GitHub repository and extract it to a local folder. 
 2. Start eDIT.exe and drag and drop in your footage - don't worry, we take both files and folders!
 3. Choose your output directory; if you've run eDIT before, this should fill in automatically. Your footage will be moved to categorized bins within this directory.
 4. Press "Label Footage!"
