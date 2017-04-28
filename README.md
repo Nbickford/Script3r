@@ -28,7 +28,7 @@ We might not be able to catch all of the information for all of the files, so we
 - Clip IMG_201 is Scene 1, Take 1
 - Clip IMG_204 has a letter of A
 - Clip IMG_205 is Take 5
-- Clip IMG_206 is from Scene 1
+- Clip IMG_206 is from Scene 1A
 
 and deduce that
 
