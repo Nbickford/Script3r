@@ -137,7 +137,7 @@ namespace New_GUI
             if (dot == -1) return;
             string extension = path.Substring(dot+1).ToLower();
             string[] supportedExtensions = {
-                "wav","mov"
+                "wav","mov","mp4"
             };
             //TODO (neil): Fill this out
             if (Array.IndexOf(supportedExtensions, extension) == -1) return;
