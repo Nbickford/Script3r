@@ -13,10 +13,10 @@ namespace Script3rSpeech
         public RecognitionStatus lastSpeechStatus;
         public string message = "";
 
-        private string subscriptionKey = "6bb55c70a5e74603be1397e0473ecbd6";//"fd25c649aae54f4aa902edb3a80a34d1";
-        private string websocketUri = "https://63e3a2a4b7b34a74a3843746b19335f5.api.cris.ai/ws/cris/speech/recognize";
+        private readonly string subscriptionKey;
+        private readonly string websocketUri;
         private string authenticationUri = ""; // according to the sample app, this is optional
-        private bool DEBUG = false; // For printing out debug information
+        private const bool DEBUG = false; // For printing out debug information
 
         private string parentKeyName = "";
         private New_GUI.MainPage m_parent;
@@ -30,10 +30,11 @@ namespace Script3rSpeech
         /// The data recognition client
         /// </summary>
         private Microsoft.CognitiveServices.SpeechRecognition.DataRecognitionClient dataClient;
-
-        public SpeechRecognizer()
+        
+        public SpeechRecognizer(New_GUI.Settings settings)
         {
-            
+            subscriptionKey = settings.GetSubscriptionKey();
+            websocketUri = settings.GetWebsocketURI();
 
             parsedPhrases = new List<string>();
             oSignalEvent = new ManualResetEvent(false);

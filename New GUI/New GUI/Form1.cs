@@ -1,17 +1,11 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using Script3rLibrary;
 using Script3rSpeech;
-using System.Runtime.InteropServices;
 
 
 
@@ -23,6 +17,7 @@ namespace New_GUI
         private List<string> files_to_move;
         private Dictionary<string, string[]> source_file_dict;
         private string destination;
+        private Settings settings;
         private SpeechRecognizer recognizer;
         private bool push = false;
         int TogMove, MValX, MValY;
@@ -37,7 +32,8 @@ namespace New_GUI
             this.files_to_move = new List<string> { };
             this.source_file_dict = new Dictionary<string, string[]> { };
             this.destination = "";
-            this.recognizer = new SpeechRecognizer();
+            this.settings = new Settings();
+            this.recognizer = new SpeechRecognizer(settings);
         }
 
 
@@ -83,33 +79,9 @@ namespace New_GUI
 
         private void MainPage_Load(object sender, EventArgs e) {
             // Load in the previous output directory from settings.txt (if it exists)
-            string directoryName = LoadOutputDirectoryName();
+            string directoryName = settings.GetOutputDirectory();
             DestinationBox.Text = directoryName;
             this.destination = directoryName;
-        }
-
-        private string LoadOutputDirectoryName() {
-            if (File.Exists("settings.txt")) {
-                string[] lines = File.ReadAllLines("settings.txt"); //TODO(neil): line length?
-                if (lines.Length > 0) {
-                    if (Directory.Exists(lines[0])) {
-                        return lines[0];
-                    }
-                }
-            }
-            return "";
-        }
-
-        private void SaveOutputDirectoryName(string dirName) {
-            if (Directory.Exists(dirName)) {
-                try {
-                    TextWriter tw = new StreamWriter("settings.txt");
-                    tw.Write(dirName);
-                    tw.Close();
-                }catch(Exception ex) {
-                    //... ehh
-                }
-            }
         }
 
         int filesAdded = 0;
@@ -326,11 +298,9 @@ namespace New_GUI
             clear.Enabled = false;
             clear_selected.Enabled = false;
 
-            push = true;                              
-            SaveOutputDirectoryName(DestinationBox.Text);
+            push = true;
+            settings.SetOutputDirectoryName(DestinationBox.Text);
             backgroundWorker1.RunWorkerAsync();
-
-            
         }
 
         // Main processing stage, run from the backgroundWorker.
